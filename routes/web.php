@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PictureController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -31,3 +32,7 @@ Auth::routes();
 Route::middleware(['auth', 'web'])->group(function () {
     Route::resource('/profile', ProfileController::class);
 });
+
+
+// Picture Routes
+Route::resource('/profile/upload', PictureController::class);

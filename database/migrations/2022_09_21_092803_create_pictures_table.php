@@ -15,6 +15,15 @@ return new class extends Migration
     {
         Schema::create('pictures', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->on('users')->onDelete('cascade');
+            $table->string('title');
+            $table->string('slug');
+            $table->string('picture');
+            $table->string('dimension');
+            $table->text('description');
+            $table->unsignedInteger('views')->default(0);
+            $table->unsignedInteger('downloads')->default(0);
+            $table->boolean('is_published');
             $table->timestamps();
         });
     }

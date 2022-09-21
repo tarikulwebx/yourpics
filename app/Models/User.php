@@ -77,4 +77,10 @@ class User extends Authenticatable
             ->saveSlugsTo('slug')
             ->doNotGenerateSlugsOnUpdate();
     }
+
+
+    public function pictures()
+    {
+        return $this->hasMany(Picture::class);
+    }
 }
