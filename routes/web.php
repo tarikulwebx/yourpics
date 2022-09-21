@@ -30,9 +30,10 @@ Auth::routes();
 
 // Profile Routes
 Route::middleware(['auth', 'web'])->group(function () {
-    Route::resource('/profile', ProfileController::class);
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profile/{slug}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile/{slug}', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('/profile/new-upload', [PictureController::class, 'create'])->name('profile.upload.create');
+    Route::post('/profile/new-upload', [PictureController::class, 'store'])->name('profile.upload.store');
 });
-
-
-// Picture Routes
-Route::resource('/profile/upload', PictureController::class);

@@ -7,37 +7,19 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Picture extends Model
+class Tag extends Model
 {
     use HasFactory, Sluggable, SluggableScopeHelpers;
 
-
     protected $fillable = [
-        'title',
+        'name',
         'slug',
-        'picture',
-        'dimension',
-        'size',
-        'description',
-        'views',
-        'downloads',
-        'is_published',
     ];
 
-
-    public function user()
+    public function pictures()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(Picture::class);
     }
-
-
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class);
-    }
-
-
-
 
     /**
      * Return the sluggable configuration array for this model.
@@ -48,7 +30,7 @@ class Picture extends Model
     {
         return [
             'slug' => [
-                'source' => 'title'
+                'source' => 'name'
             ]
         ];
     }

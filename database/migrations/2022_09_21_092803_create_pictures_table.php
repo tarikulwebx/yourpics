@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('slug');
             $table->string('picture');
             $table->string('dimension');
-            $table->text('description');
+            $table->string('size');
+            $table->text('description')->nullable();
             $table->unsignedInteger('views')->default(0);
             $table->unsignedInteger('downloads')->default(0);
             $table->boolean('is_published');

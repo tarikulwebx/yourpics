@@ -15,6 +15,8 @@
 
     <link rel="stylesheet" href="/assets/css/fontawesome.css" />
     <link rel="stylesheet" href="/assets/css/jquery.flipster.min.css" />
+    <link rel="stylesheet" href="/assets/css/select2.min.css" />
+    <link rel="stylesheet" href="/assets/css/select2-bootstrap-5-theme.css" />
     <link rel="stylesheet" href="/assets/css/style.css" />
     @vite([])
     @yield('styles')
@@ -37,6 +39,7 @@
     <script src="/assets/js/jquery.flipster.min.js"></script>
     <script src="/assets/js/masonry.pkgd.min.js"></script>
     <script src="/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="/assets/js/select2.min.js"></script>
     <script src="/assets/js/main.js"></script>
     @yield('scripts')
 </body>

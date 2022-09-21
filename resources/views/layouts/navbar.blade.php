@@ -29,8 +29,8 @@
                             <div class="dropdown-divider"></div>
                         </li>
                         <li>
-                            <a class="dropdown-item active" href="{{ route('profile.index') }}"><i
-                                    class="fa-solid fa-user"></i>
+                            <a class="dropdown-item {{ request()->is('profile') ? 'active' : '' }}"
+                                href="{{ route('profile.index') }}"><i class="fa-solid fa-user"></i>
                                 Profile</a>
                         </li>
                         <li>
@@ -99,7 +99,8 @@
                                 <div class="dropdown-divider"></div>
                             </li>
                             <li>
-                                <a class="dropdown-item active" href="profile.html"><i class="fa-solid fa-user"></i>
+                                <a class="dropdown-item active" href="{{ route('profile.index') }}"><i
+                                        class="fa-solid fa-user"></i>
                                     Profile</a>
                             </li>
                             <li>
