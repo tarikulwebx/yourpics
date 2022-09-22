@@ -4,7 +4,7 @@
 
 @section('profile-content')
     @include('components.alert')
-    <form action="{{ route('profile.upload.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('profile.upload.store', Auth::user()->slug) }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="row gy-3">

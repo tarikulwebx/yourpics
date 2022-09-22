@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Picture;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -39,7 +40,7 @@ class PictureController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $slug)
     {
         $user = Auth::user();
 
@@ -83,6 +84,16 @@ class PictureController extends Controller
 
             return redirect()->route('profile.index')->with('success', 'Picture has been uploaded');
         }
+    }
+
+
+    /**
+     * Uploaded Images of a Profile
+     */
+    public function uploads($slug)
+    {
+        $user = Auth::user();
+        return view('profile.uploads');
     }
 
     /**
