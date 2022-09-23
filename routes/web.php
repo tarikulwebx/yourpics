@@ -45,4 +45,5 @@ Route::middleware(['auth', 'web'])->group(function () {
     // Route::get('/profile/{user_slug}/uploads/{picture_slug}', [PictureController::class, 'uploadShow'])->name('profile.uploads.show');
     Route::get('/profile/{user_slug}/uploads/{picture_slug}/edit', [PictureController::class, 'edit'])->name('profile.uploads.edit');
     Route::put('/profile/{user_slug}/uploads/{picture_slug}/update', [PictureController::class, 'update'])->name('profile.uploads.update');
+    Route::delete('/profile/deletePictureById/{id}', [PictureController::class, 'deletePictureById'])->name('profile.uploads.delete');
 });

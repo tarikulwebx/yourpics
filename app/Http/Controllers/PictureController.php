@@ -192,4 +192,22 @@ class PictureController extends Controller
     {
         //
     }
+
+
+    public function deletePictureById($id)
+    {
+        $user = Auth::user();
+        $picture = Picture::findOrFail($id);
+
+        if ($picture->user_id == $user->id) {
+            $picture->tags()->detach();
+            if (Storage::exists($picture->picture)) {
+                Storage::delete($picture->picture);
+            }
+
+            $picture->delete();
+            session()->flash('success', 'Picture has been deleted successfully');
+            return response()->json();
+        }
+    }
 }

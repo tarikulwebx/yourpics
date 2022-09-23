@@ -66,13 +66,85 @@
             </div>
 
             <div class="col-12 text-end">
+
                 <button class="btn btn-primary rounded-5 px-3" type="submit">
-                    <i class="fa-solid fa-upload me-1 text-light"></i>
-                    Upload
+                    <i class="fa-regular fa-circle-check me-1 text-light"></i>
+                    Update
+                </button>
+            </div>
+            <div class="col-12">
+                <p class="text-warning mt-3">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas aliquid cumque
+                    laudantium laborum
+                    deserunt, nulla obcaecati itaque dignissimos optio quaerat.</p>
+                <button id="deletePictureBtn" type="button" class="btn btn-sm btn-danger rounded-2 px-3 py-2">
+                    <i class="fa-solid fa-trash-can me-1 text-light"></i>
+                    Delete Picture!
                 </button>
             </div>
         </div>
     </form>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel"><i class="fa-regular fa-trash-can me-1 text-danger"></i>
+                        Delete
+                        Confirmation</h5>
+                    <h1 id="pictureId" class="d-none">{{ $picture->id }}</h1>
+                    <h1 id="userSlug" class="d-none">{{ Auth::user()->slug }}</h1>
+                    <button type="button" class="btn-close small" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete? This item will be deleted immediately. You can not undo this action!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm rounded-3 px-3 btn-secondary"
+                        data-bs-dismiss="modal">Close</button>
+                    <button id="deleteConfirmBtn" type="button" class="btn btn-sm rounded-3 px-3 btn-primary">Yes,
+                        Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Delete Success Toast --}}
+    <div class="toast-container position-fixed bottom-0 start-0 p-3">
+        <div id="deleteSuccessToast" class="toast  text-bg-success border-0" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="d-flex align-items-center">
+                <div class="toast-body fw-semibold d-flex">
+                    <div><i class="fa-regular fa-circle-check me-2 flex-row"></i></div>
+                    <div>Picture has
+                        been deleted
+                        successfully
+                    </div>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    {{-- Delete Fail Toast --}}
+    <div class="toast-container position-fixed bottom-0 start-0 p-3">
+        <div id="deleteFailToast" class="toast  text-bg-danger border-0" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="d-flex align-items-center">
+                <div class="toast-body fw-semibold d-flex">
+                    <div><i class="fa-regular fa-circle-check me-2 flex-row"></i></div>
+                    <div>Picture delete failed! Try again
+                    </div>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+
 @endsection
 
 
@@ -91,4 +163,35 @@
 
         });
     </script>
+
+
+    <script>
+        const deleteModal = new bootstrap.Modal('#deleteModal');
+        $('#deletePictureBtn').on('click', function() {
+            deleteModal.show();
+        });
+
+
+        $('#deleteConfirmBtn').on('click', function() {
+            let id = $('#pictureId').html();
+            let userSlug = $('#userSlug').html();
+            axios.delete('/profile/deletePictureById/' + id)
+                .then(res => {
+                    if (res.status == 200) {
+                        deleteModal.hide();
+                        window.location.href = "/profile/" + userSlug + "/uploads";
+                    } else {
+                        const toast = new bootstrap.Toast($('#deleteFailToast'));
+                        deleteModal.hide();
+                        toast.show();
+                    }
+                })
+                .catch(err => {
+                    const toast = new bootstrap.Toast($('#deleteFailToast'));
+                    deleteModal.hide();
+                    toast.show();
+                })
+        });
+    </script>
+
 @endsection
