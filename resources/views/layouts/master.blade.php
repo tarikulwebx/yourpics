@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/assets/css/select2.min.css" />
     <link rel="stylesheet" href="/assets/css/select2-bootstrap-5-theme.css" />
     <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="/assets/css/custom.css" />
     @vite([])
     @yield('styles')
 </head>
@@ -29,8 +30,6 @@
 
     @include('layouts.footer')
 
-    @include('layouts.show-modal')
-
     <!--=====================================================-->
     <!--====================== SCRIPTS ======================-->
     <!--=====================================================-->
@@ -40,6 +39,7 @@
     <script src="/assets/js/masonry.pkgd.min.js"></script>
     <script src="/assets/js/imagesloaded.pkgd.min.js"></script>
     <script src="/assets/js/select2.min.js"></script>
+    <script src="/assets/js/axios.min.js"></script>
     <script src="/assets/js/main.js"></script>
     @yield('scripts')
 </body>

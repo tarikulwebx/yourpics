@@ -82,7 +82,7 @@ class PictureController extends Controller
 
             $picture->tags()->attach($selected_tags_int);
 
-            return redirect()->route('profile.index')->with('success', 'Picture has been uploaded');
+            return redirect()->route('profile.uploads', $user->slug)->with('success', 'Picture has been uploaded');
         }
     }
 
@@ -93,7 +93,18 @@ class PictureController extends Controller
     public function uploads($slug)
     {
         $user = Auth::user();
-        return view('profile.uploads');
+        $pictures = $user->pictures()->latest()->get();
+
+        return view('profile.uploads', compact('pictures'));
+    }
+
+
+    /**
+     * Upload Single Show
+     */
+    public function uploadShow($user_slug, $picture_slug)
+    {
+        dd('working');
     }
 
     /**
@@ -105,6 +116,27 @@ class PictureController extends Controller
     public function show(Picture $picture)
     {
         //
+    }
+
+
+    /**
+     * Download
+     */
+    public function download($slug)
+    {
+        $picture = Picture::findBySlugOrFail($slug);
+        if ($picture->is_published || Auth::user()->id == $picture->user_id) {
+            return Storage::download($picture->picture);
+        }
+    }
+
+    /**
+     * Get Users Pictures
+     */
+    public function getPictureById($id)
+    {
+        $picture = Picture::findOrFail($id);
+        return json_encode($picture);
     }
 
     /**

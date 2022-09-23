@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -36,6 +37,15 @@ class Picture extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function getPictureUrlAttribute()
+    {
+        return $this->picture ? url('/') . '/storage/' . $this->picture : '';
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->diffForHumans();
+    }
 
 
 

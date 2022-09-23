@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Picture;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use PhpParser\JsonDecoder;
 
 class ProfileController extends Controller
 {
@@ -134,5 +137,21 @@ class ProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    /**
+     * Get Picture by Id
+     */
+    public function getPictureById($id)
+    {
+        $picture = Picture::findOrFail($id);
+        $picture->user;
+        $picture->tags;
+
+        $data = [
+            'picture' => $picture,
+        ];
+        return response()->json($data);
     }
 }
