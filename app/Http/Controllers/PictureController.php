@@ -47,7 +47,8 @@ class PictureController extends Controller
         $request->validate([
             'picture' => 'required|image|mimes:png,jpg,gif',
             'title' => 'required|string|max:30',
-            'description' => 'nullable|string|max:300'
+            'description' => 'nullable|string|max:300',
+            'tags' => 'required|array|min:1'
         ]);
 
         $selected_tags =  $request->tags;
@@ -145,9 +146,13 @@ class PictureController extends Controller
      * @param  \App\Models\Picture  $picture
      * @return \Illuminate\Http\Response
      */
-    public function edit(Picture $picture)
+    public function edit($user_slug, $picture_slug)
     {
-        //
+        $picture = Picture::findBySlugOrFail($picture_slug);
+        $tags = Tag::pluck('name', 'id');
+        $selected_tags = $picture->tags->pluck('id');
+
+        return view('profile.upload-edit', compact('picture', 'tags', 'selected_tags'));
     }
 
     /**
@@ -157,9 +162,24 @@ class PictureController extends Controller
      * @param  \App\Models\Picture  $picture
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Picture $picture)
+    public function update(Request $request, $user_slug, $picture_slug)
     {
-        //
+        $user = Auth::user();
+        $picture = Picture::findBySlugOrFail($picture_slug);
+
+        $request->validate([
+            'title'       => 'required|string|max:30',
+            'description' => 'nullable|string|max:300',
+            'tags'        => 'required|array|min:1'
+        ]);
+
+        $picture->update([
+            'title'       => $request->title,
+            'description' => $request->description,
+        ]);
+
+        $picture->tags()->sync(request()->tags);
+        return redirect()->back()->with('success', 'Picture has been updated successfully');
     }
 
     /**

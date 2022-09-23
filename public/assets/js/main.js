@@ -59,7 +59,13 @@ $(document).ready(function() {
         $('#totalDownloads').html($picture.downloads);
         $('#uploadDate').html($picture.created_at);
 
-        $('#description').html($picture.description);
+        $('#editLink').attr('href', '/profile/'+$user.slug+'/uploads/'+$picture.slug+'/edit')
+
+        if ($picture.description) {
+            $('.description-wrapper').removeClass('d-none');
+            $('#description').html($picture.description);
+        }
+        
 
          $('#pictureTags').empty();
         $.each(tags, function(index, tag) {
@@ -154,8 +160,6 @@ $(document).ready(function() {
 
 
 
-
-
     /**
      * Tooltip Initialize
      */
@@ -189,9 +193,4 @@ $(document).ready(function() {
         placeholder: 'Select an option',
         width: '100%',
     });
-
-
-    
-
-
 });

@@ -42,5 +42,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/profile/{slug}/new-upload', [PictureController::class, 'create'])->name('profile.upload.create');
     Route::post('/profile/{slug}/new-upload', [PictureController::class, 'store'])->name('profile.upload.store');
     Route::get('/profile/{slug}/uploads', [PictureController::class, 'uploads'])->name('profile.uploads');
-    Route::get('/profile/{user_slug}/uploads/{picture_slug}', [PictureController::class, 'uploadShow'])->name('profile.uploads.show');
+    // Route::get('/profile/{user_slug}/uploads/{picture_slug}', [PictureController::class, 'uploadShow'])->name('profile.uploads.show');
+    Route::get('/profile/{user_slug}/uploads/{picture_slug}/edit', [PictureController::class, 'edit'])->name('profile.uploads.edit');
+    Route::put('/profile/{user_slug}/uploads/{picture_slug}/update', [PictureController::class, 'update'])->name('profile.uploads.update');
 });

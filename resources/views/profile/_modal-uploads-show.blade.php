@@ -94,7 +94,10 @@
                             <a href="single.html" class="btn btn-sm btn-primary">View in Page
                                 <i class="fa-solid fa-arrow-right-long ms-1"></i></a>
 
-                            <p id="description"></p>
+                            <div class="mt-4 description-wrapper d-none">
+                                <h6 class="fw-bold">Description:</h6>
+                                <p id="description"></p>
+                            </div>
                         </div>
                         <div class="col-12">
                             <div id="pictureTags" class="image-tags d-flex flex-wrap gap-2">
@@ -109,9 +112,9 @@
                     Under the license of Yourpics
                 </p>
                 <div class="d-flex flex-row">
-                    <button type="button" class="btn btn-sm px-3 btn-primary me-1" data-bs-dismiss="modal">
+                    <a id="editLink" href="#" class="btn btn-sm px-3 btn-primary me-1">
                         Edit
-                    </button>
+                    </a>
                     <button type="button" class="btn btn-sm px-3 btn-secondary" data-bs-dismiss="modal">
                         Close
                     </button>

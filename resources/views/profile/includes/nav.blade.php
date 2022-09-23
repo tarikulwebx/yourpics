@@ -4,14 +4,14 @@
         Profile
     </a>
     <a href="{{ route('profile.edit', Auth::user()->slug) }}"
-        class="list-group-item list-group-item-action {{ request()->is('profile/*/edit') ? 'active' : '' }}">Edit
+        class="list-group-item list-group-item-action {{ request()->is('profile/' . Auth::user()->slug . '/edit') ? 'active' : '' }}">Edit
         Profile</a>
     <a href="{{ route('profile.upload.create', Auth::user()->slug) }}"
         class="list-group-item list-group-item-action {{ request()->is('profile/*/new-upload') ? 'active' : '' }}">New
         Upload
     </a>
     <a href="{{ route('profile.uploads', Auth::user()->slug) }}"
-        class="list-group-item list-group-item-action {{ request()->is('profile/*/uploads') ? 'active' : '' }}">Your
+        class="list-group-item list-group-item-action {{ request()->is('profile/' . Auth::user()->slug . '/uploads*') ? 'active' : '' }}">Your
         Uploads
     </a>
 

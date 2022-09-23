@@ -1,10 +1,10 @@
 @extends('profile.layout.profile-layout')
 
-@section('title', 'New Upload')
+@section('title', 'Your Uploads')
 
 @section('profile-content')
     @include('components.alert')
-    <h2 class="mb-3">Uploads</h2>
+    <h4 class="mb-3 fw-bold text-dark text-uppercase">YOur Uploads</h4>
     <!-- UPLOADS GALLERY -->
     <section id="gallery-section" class="gallery-section">
         <div id="mansonryGridAuthorUploads" class="row g-4">
@@ -25,7 +25,8 @@
                                 </div>
                                 <div class="card-hover-content__footer d-flex align-items-center justify-content-between">
                                     <div>
-                                        <a href="#?" class="btn btn-sm text-light rounded-5 gallery-image-edit-btn"><i
+                                        <a href="{{ route('profile.uploads.edit', [Auth::user()->slug, $picture->slug]) }}"
+                                            class="btn btn-sm text-light rounded-5 gallery-image-edit-btn"><i
                                                 class="fa-solid fa-pen"></i></a>
                                     </div>
                                     <a href="{{ route('download', $picture->slug) }}" class="btn download-btn">

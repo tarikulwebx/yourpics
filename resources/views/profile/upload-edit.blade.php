@@ -1,31 +1,19 @@
 @extends('profile.layout.profile-layout')
 
-@section('title', 'New Upload')
+@section('title', 'Edit Picture')
 
 @section('profile-content')
     @include('components.alert')
-    <h4 class="mb-3 fw-bold text-dark text-uppercase">New Upload</h4>
-    <form action="{{ route('profile.upload.store', Auth::user()->slug) }}" method="POST" enctype="multipart/form-data">
+    <h4 class="mb-3 fw-bold text-dark text-uppercase">Edit Upload</h4>
+    <form action="{{ route('profile.uploads.update', [Auth::user()->slug, $picture->slug]) }}" method="POST">
         @csrf
-
+        @method('PUT')
         <div class="row gy-3">
             <div class="col-12">
                 <div>
-                    <img id="imagePreview" src="/assets/images/picture-placeholder.jpg"
-                        class="img-fluid rounded-2 profile-upload-img" alt=""
-                        onclick="document.getElementById('fileInput').click()" />
+                    <img id="imagePreview" src="{{ $picture->picture_url }}" class="img-fluid rounded-2 profile-upload-img"
+                        alt="" onclick="document.getElementById('fileInput').click()" />
                 </div>
-                <input id="fileInput" name="picture"
-                    class="form-control mt-2 @error('picture')
-                    is-invalid
-                @enderror"
-                    type="file" accept="image/*"
-                    onchange="document.getElementById('imagePreview').src = window.URL.createObjectURL(this.files[0])" />
-                @error('picture')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
             </div>
             <div class="col-md-6">
                 <label for="title" class="form-label mb-1">Title
@@ -34,7 +22,7 @@
                     class="form-control @error('title')
                     is-invalid
                 @enderror"
-                    name="title" placeholder="Picture title" value="{{ old('title') }}" />
+                    name="title" placeholder="Picture title" value="{{ old('title', $picture->title) }}" />
                 @error('title')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -47,7 +35,8 @@
                 <select id="tags" class="select2-tags form-control d-none" name="tags[]" multiple="multiple">
                     <option value="">Select tags</option>
                     @foreach ($tags as $id => $name)
-                        <option value="{{ $id }}" {{ collect(old('tags'))->contains($id) ? 'selected' : '' }}>
+                        <option value="{{ $id }}"
+                            {{ collect(old('tags'))->contains($id) || $selected_tags->contains($id) ? 'selected' : '' }}>
                             {{ $name }}
                         </option>
                     @endforeach
@@ -64,7 +53,7 @@
                     class="form-control char-count-textarea @error('description')
                     is-invaild
                 @enderror"
-                    name="description" rows="4" maxlength="300" placeholder="Image description (optional)">{{ old('description') }}</textarea>
+                    name="description" rows="4" maxlength="300" placeholder="Image description (optional)">{{ old('description', $picture->description) }}</textarea>
                 @error('description')
                     <div class="invalid-feedback">
                         {{ $message }}
