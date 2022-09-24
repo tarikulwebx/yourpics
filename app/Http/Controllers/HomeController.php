@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Picture;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $pictures = Picture::with('user')->where('is_published', '=', true)->get();
+        $tags = Tag::all();
+        return view('home', compact('pictures', 'tags'));
     }
 }

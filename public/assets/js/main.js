@@ -44,6 +44,9 @@ $(document).ready(function() {
     });
 
 
+    /**
+     * Uploads Modal Content Work
+     */
     function renderData($picture) {
         let $user = $picture.user;
         let tags = $picture.tags;

@@ -137,7 +137,9 @@ class PictureController extends Controller
     public function getPictureById($id)
     {
         $picture = Picture::findOrFail($id);
-        return json_encode($picture);
+        $picture->user;
+        $picture->tags;
+        return response()->json($picture);
     }
 
     /**
