@@ -137,8 +137,26 @@ class PictureController extends Controller
     public function getPictureById($id)
     {
         $picture = Picture::findOrFail($id);
+        $picture->update([
+            'views' => $picture->views + 1
+        ]);
+
         $picture->user;
         $picture->tags;
+        $related = $picture->relatedPostsByTag();
+
+        foreach ($related as $related_picture) {
+            $related_picture->user;
+        }
+
+
+        $picture['related'] = $related;
+
+        // $related_pictures = Picture::whereHas('tags', function ($query) use ($picture) {
+        //     $tagIds = $picture->tags()->pluck('tags.id')->all();
+        //     $query->whereIn('tags.id', $tagIds);
+        // })->where('id', '<>', $picture->id)->get();
+
         return response()->json($picture);
     }
 

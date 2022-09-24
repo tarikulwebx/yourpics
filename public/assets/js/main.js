@@ -19,11 +19,11 @@ $(document).ready(function() {
      */
     $(".mansonry-grid").imagesLoaded(function () {
         $(".mansonry-grid").masonry({
-            // options
-            itemSelector: ".grid-item",
+            itemSelector: '.grid-item',
+            columnWidth: '.grid-item',
         });
     });
-
+    
 
     /**
      * Image Modal Show

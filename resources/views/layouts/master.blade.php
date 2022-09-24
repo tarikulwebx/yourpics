@@ -40,6 +40,7 @@
     <script src="/assets/js/imagesloaded.pkgd.min.js"></script>
     <script src="/assets/js/select2.min.js"></script>
     <script src="/assets/js/axios.min.js"></script>
+
     <script src="/assets/js/main.js"></script>
     @yield('scripts')
 </body>

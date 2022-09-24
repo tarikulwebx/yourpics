@@ -47,6 +47,15 @@ class Picture extends Model
         return Carbon::parse($value)->diffForHumans();
     }
 
+    // Related Picture by Tags
+    public function relatedPostsByTag()
+    {
+        return Picture::whereHas('tags', function ($query) {
+            $tagIds = $this->tags()->pluck('tags.id')->all();
+            $query->whereIn('tags.id', $tagIds);
+        })->where('id', '<>', $this->id)->take(4)->get();
+    }
+
 
 
     /**

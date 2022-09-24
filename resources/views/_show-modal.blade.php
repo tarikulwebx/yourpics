@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-center flex-row gap-2 gap-sm-3">
-                    <button class="btn btn-sm text-muted" type="button" data-bs-dismiss="modal" data-bs-toggle="modal">
+                    <button class="btn btn-sm text-muted" type="button" data-bs-dismiss="modal">
                         Close
                     </button>
                     @auth
@@ -115,7 +115,11 @@
                     </div>
 
                     <!-- Related Images -->
-                    <h4 class="text-dark mb-3">Related Images</h4>
+                    <h4 class="text-dark mb-3">Related Pictures</h4>
+                    <div class="gallery-section">
+                        <div id="relatedModalPicturesGrid" class="row g-4">
+                        </div>
+                    </div>
 
                 </div>
             </div>

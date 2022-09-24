@@ -220,8 +220,8 @@
         <!--~~~~~~~~~~ GALLERY SECTION ~~~~~~~~~~~-->
         <section id="gallery-section" class="gallery-section">
             <div class="container-xl">
-                <div class="mansonry-grid row g-4">
-                    @foreach ($pictures as $picture)
+                <div id="loadData" class="mansonry-grid row g-4 overflow-hidden">
+                    {{-- @foreach ($pictures as $picture)
                         <!-- Picture Item -->
                         <div class="col-sm-6 col-md-4 col-lg-3 grid-item">
                             <div class="img-card">
@@ -264,10 +264,10 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-
+                    @endforeach --}}
 
                 </div>
+                {{-- {{ $pictures->links() }} --}}
 
                 <!-- Pagination -->
                 <a class="btn btn-primary w-100 mt-4 py-2 d-none" href="#" role="button">Continue Browsing with
@@ -277,7 +277,7 @@
                 <!-- Load More Btn -->
                 <div class="text-center mt-4 pt-2 d-flex align-items-center justify-content-between gap-3">
                     <hr class="border border-primary border-1 opacity-25 w-100" />
-                    <button class="btn btn-outline-primary rounded-circle loadmore-btn shadow">
+                    <button id="load_more_button" class="btn btn-outline-primary rounded-circle loadmore-btn shadow">
                         <span class="d-block">Load</span>
                         <span class="d-block">More</span>
                     </button>
@@ -294,14 +294,69 @@
 
 
 @section('scripts')
+
+    {{-- Load More Script --}}
+    <script>
+        function loadMoreData(id = 0) {
+            axios.post('{{ route('load-picture') }}', {
+                    id: id
+                })
+                .then(res => {
+                    //console.log(res)
+                    $('#dataElement').remove();
+
+                    $(".mansonry-grid").append(res.data);
+                    $(".mansonry-grid").imagesLoaded(function() {
+                        $(".mansonry-grid").masonry("reloadItems").masonry("layout");
+                    })
+
+                    // $('#loadData').append(res.data);
+                    $('#load_more_button').html('<span class="d-block">Load</span><span class="d-block">More</span>');
+                    var haveData = $('#dataElement').data('have');
+                    if (haveData === false) {
+                        $('#load_more_button').addClass('d-none');
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                })
+        }
+        loadMoreData(0);
+
+        $(document).on('click', '#load_more_button', function() {
+            var haveData = $('#dataElement').data('have');
+
+            if (haveData === true) {
+                var id = $('#dataElement').data('id');
+                $('#load_more_button').html('<b>Loading</b>');
+                loadMoreData(id);
+            } else {
+                $('#load_more_button').addClass('d-none');
+            }
+
+            //console.log(id);
+
+
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
     <script>
         const showModal = new bootstrap.Modal('#pictureShowModal');
-
 
         // HTML Render Function
         function dataRenderOnModal(picture) {
             let user = picture.user;
             let tags = picture.tags;
+            let related_pictures = picture.related;
 
             if (user.picture) {
                 $('#pictureShowModal #userImg').attr('src', '/storage/' + user.picture);
@@ -328,10 +383,73 @@
                 );
             });
 
+
+            // Render related Images
+
+            $('#relatedModalPicturesGrid').empty();
+            $.each(related_pictures, function(index, related_picture) {
+                let item = `
+                    <div class="col-sm-6 col-xl-3 grid-item">
+                        <div class="img-card">
+                            <a href="javascript:void(0);" class="image-wrapper-link d-block showModalRelateBtn"
+                                 data-id="${related_picture.id}">
+                                <img class="img-fluid" src="/storage/${related_picture.picture}"
+                                    alt="${related_picture.title}" style="width: 100%; height: 250px; object-fit: cover" />
+                            </a>
+                            <div class="card-hover-content p-2 d-flex flex-column text-white">
+                                <div
+                                    class="card-hover-content__header d-flex align-items-center justify-content-between">
+                                    <div class="caption fw-semibold">
+                                        ${related_picture.title}
+                                    </div>
+                                </div>
+                                <div
+                                    class="card-hover-content__footer d-flex align-items-center justify-content-between">
+                                    <div class="author d-flex align-items-center gap-2">
+                                        <img src="${related_picture.user.picture ? related_picture.user.picture : '/assets/images/profile-placeholder.jpg'}"
+                                            class="rounded-circle d-block" alt="" />
+                                        <div>
+                                            <h6 class="mb-0 fw-semibold">
+                                                <a href="#" class="text-decoration-none">${related_picture.user.first_name + ' '+ related_picture.user.last_name}</a>
+                                            </h6>
+                                            <small class="d-block"><i class="fa-solid fa-award"></i>
+                                                popular</small>
+                                        </div>
+                                    </div>
+                                    <a href="/download/${related_picture.slug}" class="btn download-btn">
+                                        <i class="fa-solid fa-download"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+                $('#relatedModalPicturesGrid').append(item);
+            });
+
+
+            $('.showModalRelateBtn').on('click', function() {
+
+                let id = $(this).data('id');
+                $('#pictureId').html(id);
+
+                let pictureId = $('#pictureId').html();
+
+                axios.get('/getPictureById/' + pictureId)
+                    .then(res => {
+                        if (res.data) {
+                            dataRenderOnModal(res.data);
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    })
+            });
+
         }
 
         // Show Modal Button Click
-        $('.showModalBtn').on('click', function(e) {
+        $('#loadData').on('click', '.showModalBtn', function(e) {
             e.preventDefault();
 
             let id = $(this).data('id');
@@ -339,18 +457,22 @@
 
             showModal.show();
 
-
             let pictureId = $('#pictureId').html();
 
             axios.get('/getPictureById/' + pictureId)
                 .then(res => {
-                    dataRenderOnModal(res.data);
+                    if (res.data) {
+                        dataRenderOnModal(res.data);
+                    }
                 })
                 .catch(err => {
                     console.error(err);
                 })
 
         });
+
+
+
 
         // Modal Reset to Empty
         $('#pictureShowModal').on('hidden.bs.modal', function() {
@@ -359,13 +481,15 @@
 
             $('#pictureShowModal #userName').html('..');
             $('#pictureShowModal #downloadBtn').attr('href', '');
-            $('#pictureShowModal #pictureImg').attr('alt', picture.title);
+            $('#pictureShowModal #pictureImg').attr('alt', '..');
             $('#pictureShowModal #pictureTitle').html('...');
             $('#pictureShowModal #pictureViews').html('..');
             $('#pictureShowModal #pictureDownloads').html('..');
             $('#pictureShowModal #picturePublished').html('...');
             $('#pictureShowModal #pictureDescription').addClass('d-none');
             $('#pictureShowModal #pictureDescription p').html('...');
-        })
+
+            $('#relatedModalPicturesGrid').empty();
+        });
     </script>
 @endsection
