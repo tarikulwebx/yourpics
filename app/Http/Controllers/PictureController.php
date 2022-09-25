@@ -145,9 +145,9 @@ class PictureController extends Controller
         $picture->tags;
         $related = $picture->relatedPostsByTag();
 
-        foreach ($related as $related_picture) {
-            $related_picture->user;
-        }
+        // foreach ($related as $related_picture) {
+        //     $related_picture->user;
+        // }
 
 
         $picture['related'] = $related;
