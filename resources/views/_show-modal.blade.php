@@ -66,7 +66,7 @@
                                         <div class="vr"></div>
                                         <div>
                                             <h6 class="mb-1 fw-semibold">
-                                                Favorite
+                                                Favorites
                                             </h6>
                                             <p id="pictureFavs" class="mb-0 small text-muted">
                                                 ..

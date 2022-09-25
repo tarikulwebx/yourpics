@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
 
         $pictures->each(function ($picture) use ($tags) {
             $picture->tags()->attach(
-                $tags->random(rand(1, 5))->pluck('id')->toArray()
+                $tags->random(rand(1, 15))->pluck('id')->toArray()
             );
         });
     }

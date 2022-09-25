@@ -361,6 +361,7 @@
             $('#pictureShowModal #pictureTitle').html(picture.title);
             $('#pictureShowModal #pictureViews').html(picture.views);
             $('#pictureShowModal #pictureDownloads').html(picture.downloads);
+            $('#pictureShowModal #pictureFavs').html(picture.favorites_count);
             $('#pictureShowModal #picturePublished').html(picture.created_at);
             $('#pictureShowModal #modalFavBtn').attr('data-id', picture.id);
 
@@ -483,6 +484,7 @@
             $('#pictureShowModal #pictureTitle').html('...');
             $('#pictureShowModal #pictureViews').html('..');
             $('#pictureShowModal #pictureDownloads').html('..');
+            $('#pictureShowModal #pictureFavs').html('..');
             $('#pictureShowModal #picturePublished').html('...');
             $('#pictureShowModal #pictureDescription').addClass('d-none');
             $('#pictureShowModal #pictureDescription p').html('...');

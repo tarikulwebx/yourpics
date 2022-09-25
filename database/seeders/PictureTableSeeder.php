@@ -15,6 +15,6 @@ class PictureTableSeeder extends Seeder
      */
     public function run()
     {
-        Picture::factory(30)->create();
+        Picture::factory(200)->create();
     }
 }
