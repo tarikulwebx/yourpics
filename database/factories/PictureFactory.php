@@ -23,6 +23,7 @@ class PictureFactory extends Factory
             'picture'   => 'image (' . rand(1, 30) . ').jpg',
             'dimension' => rand(300, 1000) . 'x' . rand(300, 1000),
             'size' => rand(1, 6),
+            'description' => fake()->realText(200, 1),
             'is_published' => true,
         ];
     }
