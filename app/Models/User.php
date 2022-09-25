@@ -72,6 +72,12 @@ class User extends Authenticatable
     }
 
 
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class, 'user_id', 'id');
+    }
+
+
     /**
      * Return the sluggable configuration array for this model.
      *
