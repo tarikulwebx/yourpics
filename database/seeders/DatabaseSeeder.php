@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Picture;
+use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,11 +18,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+            UserTableSeeder::class,
+            TagTableSeeder::class,
+            PictureTableSeeder::class,
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+
+        // Attach Picture and Tag relationships
+        $tags     = Tag::all();
+        $pictures = Picture::all();
+
+        $pictures->each(function ($picture) use ($tags) {
+            $picture->tags()->attach(
+                $tags->random(rand(1, 5))->pluck('id')->toArray()
+            );
+        });
     }
 }
