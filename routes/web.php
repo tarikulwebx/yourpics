@@ -25,6 +25,8 @@ Route::get('/gallery', function () {
     return view('gallery');
 })->name('gallery');
 
+Route::get('/gallery/{slug}', [PictureController::class, 'singlePicture'])->name('singlePicture');
+
 
 // Download Image
 Route::get('/download/{slug}', [PictureController::class, 'download'])->name('download');

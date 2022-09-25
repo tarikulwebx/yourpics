@@ -22,6 +22,21 @@ class PictureController extends Controller
         //
     }
 
+
+    /**
+     * Single Picture Show
+     */
+    public function singlePicture($slug)
+    {
+        $picture = Picture::findBySlugOrFail($slug);
+        $picture->update([
+            'views' => $picture->views + 1
+        ]);
+
+        $related_pictures = $picture->relatedPicturesByTag(8);
+        return view('single', compact('picture', 'related_pictures'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -126,9 +141,10 @@ class PictureController extends Controller
     public function download($slug)
     {
         $picture = Picture::findBySlugOrFail($slug);
-        if ($picture->is_published || Auth::user()->id == $picture->user_id) {
-            return Storage::download($picture->picture);
-        }
+        $picture->update([
+            'downloads' => $picture->downloads + 1,
+        ]);
+        return Storage::download($picture->picture);
     }
 
     /**
@@ -143,7 +159,7 @@ class PictureController extends Controller
 
         $picture->user;
         $picture->tags;
-        $related = $picture->relatedPostsByTag();
+        $related = $picture->relatedPicturesByTag();
 
         // foreach ($related as $related_picture) {
         //     $related_picture->user;

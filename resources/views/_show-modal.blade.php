@@ -96,7 +96,7 @@
                                 <i class="fa-solid fa-share me-1"></i>
                                 Share
                             </button>
-                            <a id="pictureViewInPageLink" href="#" class="btn btn-sm btn-primary">View in Page
+                            <a id="showInPageLink" href="#" class="btn btn-sm btn-primary">View in Page
                                 <i class="fa-solid fa-arrow-right-long ms-1"></i></a>
                             <div id="pictureDescription" class="mt-4 d-none">
                                 <h6 class="fw-bold">Description: </h6>

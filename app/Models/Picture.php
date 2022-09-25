@@ -53,12 +53,12 @@ class Picture extends Model
     }
 
     // Related Picture by Tags
-    public function relatedPostsByTag()
+    public function relatedPicturesByTag($take = 4)
     {
         return Picture::with('user')->whereHas('tags', function ($query) {
             $tagIds = $this->tags()->pluck('tags.id')->all();
             $query->whereIn('tags.id', $tagIds);
-        })->where('id', '<>', $this->id)->take(4)->get();
+        })->where('id', '<>', $this->id)->take($take)->get();
     }
 
 
