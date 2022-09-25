@@ -294,9 +294,13 @@
 
 
 @section('scripts')
-
-    {{-- Load More Script --}}
     <script>
+        /*
+         *   Load More Pictures
+         *
+         *   @ loadMoreData function call
+         *   @ load_more_button click
+         */
         function loadMoreData(id = 0) {
             axios.post('{{ route('load-picture') }}', {
                     id: id
@@ -323,6 +327,7 @@
         }
         loadMoreData(0);
 
+        // Load More Button
         $(document).on('click', '#load_more_button', function() {
             var haveData = $('#dataElement').data('have');
 
@@ -333,18 +338,23 @@
             } else {
                 $('#load_more_button').addClass('d-none');
             }
-
-            //console.log(id);
-
-
         });
     </script>
 
 
     <script>
+        /*
+         *   Show Picture Modal with Data Render
+         * 
+         *   @pictureShowModal Modal
+         *   @dataRenderOnModal DataRedering
+         * 
+         * */
+
+        // Modal Initialization
         const showModal = new bootstrap.Modal('#pictureShowModal');
 
-        // HTML Render Function
+        // Data Renering when load modal
         function dataRenderOnModal(picture) {
             let user = picture.user;
             let tags = picture.tags;
@@ -386,7 +396,7 @@
             });
 
 
-            // Render related Images
+            // Render Related Pictures
             $('#relatedModalPicturesGrid').empty();
             $.each(related_pictures, function(index, related_picture) {
                 let item = `
@@ -429,6 +439,7 @@
             });
 
 
+            // Related Picture Click Render Elements Again
             $('.showModalRelateBtn').on('click', function() {
 
                 let id = $(this).data('id');
@@ -449,8 +460,8 @@
 
         }
 
-        // Show Modal Button Click
-        $('#loadData').on('click', '.showModalBtn', function(e) {
+        // Show Modal By onClick Picture
+        $(document).on('click', '.showModalBtn', function(e) {
             e.preventDefault();
 
             let id = $(this).data('id');
@@ -473,9 +484,7 @@
         });
 
 
-
-
-        // Modal Reset to Empty
+        // Modal Data Reset on hidden modal
         $('#pictureShowModal').on('hidden.bs.modal', function() {
             $('#pictureShowModal #userImg').attr('src', '/assets/images/profile-placeholder.jpg');
             $('#pictureShowModal #pictureImg').attr('src', '/assets/images/picture-placeholder.jpg');
