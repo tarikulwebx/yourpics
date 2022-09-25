@@ -214,6 +214,7 @@ class PictureController extends Controller
     }
 
 
+    // Delete Picture By Id
     public function deletePictureById($id)
     {
         $user = Auth::user();

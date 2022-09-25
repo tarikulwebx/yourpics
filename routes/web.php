@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PictureController;
 use App\Http\Controllers\ProfileController;
@@ -28,6 +29,9 @@ Route::get('/gallery', function () {
 // Download Image
 Route::get('/download/{slug}', [PictureController::class, 'download'])->name('download');
 Route::get('/getPictureById/{id}', [PictureController::class, 'getPictureById']);
+
+// Add to Favorite
+Route::post('/addToFavorite', [FavoriteController::class, 'addToFavorite']);
 
 
 Auth::routes();

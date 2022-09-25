@@ -23,7 +23,7 @@
                         Close
                     </button>
                     @auth
-                        <button id="pictureFavBtn" class="btn btn-sm btn-outline-secondary">
+                        <button id="pictureFavBtn" data-id="" class="btn btn-sm btn-outline-secondary">
                             <i class="fa-regular fa-heart"></i>
                         </button>
                     @endauth

@@ -196,4 +196,32 @@ $(document).ready(function() {
         placeholder: 'Select an option',
         width: '100%',
     });
+
+
+
+    /**
+     * Favorite Item control
+     */
+    $(document).on('click', '.fav-btn', function() {
+        var picture_id = $(this).data('id');
+        axios.post('/addToFavorite',{id: picture_id})
+        .then(res => {
+            // console.log(res)
+            if (res.status == 200) {
+                const toast = new bootstrap.Toast($('#successToast'));
+                $('#successToast .toastMessage').html(res.data.message);
+                toast.show();
+                $(this).addClass('text-white').html('<i class="fa-solid fa-heart "></i>');
+            } else if (res.status == 201) {
+                const toast = new bootstrap.Toast($('#warningToast'));
+                $('#warningToast .toastMessage').html(res.data.message);
+                toast.show();
+                $(this).removeClass('text-white').html('<i class="fa-regular fa-heart "></i>');
+            }
+        })
+        .catch(err => {
+            console.error(err); 
+        })
+    });
+
 });

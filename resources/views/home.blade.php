@@ -341,14 +341,6 @@
     </script>
 
 
-
-
-
-
-
-
-
-
     <script>
         const showModal = new bootstrap.Modal('#pictureShowModal');
 
@@ -385,7 +377,6 @@
 
 
             // Render related Images
-
             $('#relatedModalPicturesGrid').empty();
             $.each(related_pictures, function(index, related_picture) {
                 let item = `

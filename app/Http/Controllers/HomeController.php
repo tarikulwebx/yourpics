@@ -52,10 +52,20 @@ class HomeController extends Controller
             foreach ($pictures as $picture) {
 
                 $fav_btn_content = '';
-                if (Auth::user()) {
+                if (Auth::guest()) {
                     $fav_btn_content .= '<button class="btn fav-btn" data-id="' . $picture->id . '">
                                         <i class="fa-regular fa-heart"></i>
                                     </button>';
+                } else {
+                    if (Auth::user()->favorites()->where('picture_id', '=', $picture['id'])->count() > 0) {
+                        $fav_btn_content .= '<button class="btn fav-btn text-white" data-id="' . $picture->id . '">
+                                        <i class="fa-solid fa-heart "></i>
+                                    </button>';
+                    } else {
+                        $fav_btn_content .= '<button class="btn fav-btn" data-id="' . $picture->id . '">
+                                        <i class="fa-regular fa-heart"></i>
+                                    </button>';
+                    }
                 }
 
                 $output .= '
