@@ -224,4 +224,22 @@ $(document).ready(function() {
         })
     });
 
+    $(document).on('click', '#modalFavBtn', function () { 
+        var picture_id = $(this).data('id');
+        axios.post('/addToFavorite',{id: picture_id})
+        .then(res => {
+            // console.log(res)
+            if (res.status == 200) {
+                $(this).html('<i class="fa-solid fa-heart "></i>');
+                $('.fav-btn[data-id='+picture_id+']').addClass('text-white').html('<i class="fa-solid fa-heart "></i>');
+            } else if (res.status == 201) {
+                $(this).html('<i class="fa-regular fa-heart "></i>');
+                $('.fav-btn[data-id='+picture_id+']').addClass('text-white').html('<i class="fa-regular fa-heart "></i>');
+            }
+        })
+        .catch(err => {
+            console.error(err); 
+        })
+    });
+
 });

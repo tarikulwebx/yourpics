@@ -152,6 +152,12 @@ class PictureController extends Controller
 
         $picture['related'] = $related;
 
+        if (Auth::user()->favorites()->where('picture_id', '=', $id)->count() > 0) {
+            $picture['favorite'] = true;
+        } else {
+            $picture['favorite'] = false;
+        }
+
         // $related_pictures = Picture::whereHas('tags', function ($query) use ($picture) {
         //     $tagIds = $picture->tags()->pluck('tags.id')->all();
         //     $query->whereIn('tags.id', $tagIds);

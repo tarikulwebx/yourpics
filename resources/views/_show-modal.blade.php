@@ -22,11 +22,9 @@
                     <button class="btn btn-sm text-muted" type="button" data-bs-dismiss="modal">
                         Close
                     </button>
-                    @auth
-                        <button id="pictureFavBtn" data-id="" class="btn btn-sm btn-outline-secondary">
-                            <i class="fa-regular fa-heart"></i>
-                        </button>
-                    @endauth
+                    <button id="modalFavBtn" data-id="" class="btn btn-sm btn-outline-secondary">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
 
                     <a id="downloadBtn" href="" class="btn btn-sm btn-primary">
                         <i class="fa-solid fa-download me-1 d-none d-sm-inline"></i>
@@ -102,7 +100,7 @@
                                 <i class="fa-solid fa-arrow-right-long ms-1"></i></a>
                             <div id="pictureDescription" class="mt-4 d-none">
                                 <h6 class="fw-bold">Description: </h6>
-                                <p class="mb-0">
+                                <p class="mb-0 small text-muted">
                                     ...
                                 </p>
                             </div>

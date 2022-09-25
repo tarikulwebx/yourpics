@@ -362,6 +362,13 @@
             $('#pictureShowModal #pictureViews').html(picture.views);
             $('#pictureShowModal #pictureDownloads').html(picture.downloads);
             $('#pictureShowModal #picturePublished').html(picture.created_at);
+            $('#pictureShowModal #modalFavBtn').attr('data-id', picture.id);
+
+            if (picture.favorite) {
+                $('#pictureShowModal #modalFavBtn').html('<i class="fa-solid fa-heart "></i>');
+            } else {
+                $('#pictureShowModal #modalFavBtn').html('<i class="fa-regular fa-heart "></i>');
+            }
 
             if (picture.description) {
                 $('#pictureShowModal #pictureDescription').removeClass('d-none');
