@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PictureController;
 use App\Http\Controllers\ProfileController;
@@ -21,9 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/', [HomeController::class, 'loadMorePicture'])->name('load-picture');
 
-Route::get('/gallery', function () {
-    return view('gallery');
-})->name('gallery');
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
 Route::get('/gallery/{slug}', [PictureController::class, 'singlePicture'])->name('singlePicture');
 

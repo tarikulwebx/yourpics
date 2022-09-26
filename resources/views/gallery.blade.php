@@ -3,16 +3,16 @@
 @section('title', 'Gallery')
 
 @section('content')
-    <main class="py-4 px-sm-2">
+    <main class="py-4 my-2 px-sm-2">
         <!--~~~~~~~~ FILTER SECTION START ~~~~~~~~-->
-        <section class="filter-section mb-3 pb-1">
+        <section class="filter-section mb-4">
             <div class="container-xl">
                 <div class="d-flex align-items-md-center gap-3 justify-content-between flex-column flex-md-row">
                     <div>
-                        <h4 class="mb-0 text-black text-uppercase fw-bold">
+                        <h3 class="mb-0 text-uppercase fw-bold text-primary">
                             Gallery
-                            <i class="fa-solid fa-grip text-primary ms-1"></i>
-                        </h4>
+                            <i class="fa-solid fa-grip text-secondary ms-1"></i>
+                        </h3>
                     </div>
                     <form action="">
                         <div class="d-flex flex-column flex-sm-row gap-3">
@@ -39,390 +39,14 @@
         <!--~~~~~~~~~~ GALLERY SECTION ~~~~~~~~~~~-->
         <section id="gallery-section" class="gallery-section">
             <div class="container-xl">
-                <div class="gallery-grid row g-4">
-                    <div class="col-sm-6 col-md-4 col-lg-3 grid-item">
-                        <div class="img-card">
-                            <img class="img-fluid" src="assets/images/gallery-images/image (1).jpg" alt="" />
-                            <div class="card-hover-content p-2 d-flex flex-column text-white show-modal">
-                                <div class="card-hover-content__header d-flex align-items-center justify-content-between">
-                                    <div class="caption fw-semibold">
-                                        Caption Title
-                                    </div>
-                                    <button class="btn btn-sm fav-btn">
-                                        <i class="fa-regular fa-heart"></i>
-                                    </button>
-                                </div>
-                                <div class="card-hover-content__footer d-flex align-items-center justify-content-between">
-                                    <div class="author d-flex align-items-center gap-2">
-                                        <img src="assets/images/profile-pic.jpg" class="rounded-circle d-block"
-                                            alt="" />
-                                        <div>
-                                            <h6 class="mb-0 fw-semibold">
-                                                <a href="#" class="text-decoration-none">Tarikul Islam</a>
-                                            </h6>
-                                            <small class="d-block"><i class="fa-solid fa-award"></i>
-                                                popular</small>
-                                        </div>
-                                    </div>
-                                    <button class="btn download-btn">
-                                        <i class="fa-solid fa-download"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-3 grid-item">
-                        <div class="img-card">
-                            <img class="img-fluid" src="assets/images/gallery-images/image (13).jpg" alt="" />
-                            <div class="card-hover-content p-2 d-flex flex-column text-white show-modal">
-                                <div class="card-hover-content__header d-flex align-items-center justify-content-between">
-                                    <div class="caption fw-semibold">
-                                        Caption Title
-                                    </div>
-                                    <button class="btn btn-sm fav-btn">
-                                        <i class="fa-regular fa-heart"></i>
-                                    </button>
-                                </div>
-                                <div class="card-hover-content__footer d-flex align-items-center justify-content-between">
-                                    <div class="author d-flex align-items-center gap-2">
-                                        <img src="assets/images/profile-pic.jpg" class="rounded-circle d-block"
-                                            alt="" />
-                                        <div>
-                                            <h6 class="mb-0 fw-semibold">
-                                                <a href="#" class="text-decoration-none">Tarikul Islam</a>
-                                            </h6>
-                                            <small class="d-block"><i class="fa-solid fa-award"></i>
-                                                popular</small>
-                                        </div>
-                                    </div>
-                                    <button class="btn download-btn">
-                                        <i class="fa-solid fa-download"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-3 grid-item">
-                        <div class="img-card">
-                            <img class="img-fluid" src="assets/images/gallery-images/image (3).jpg" alt="" />
-                            <div class="card-hover-content p-2 d-flex flex-column text-white show-modal">
-                                <div class="card-hover-content__header d-flex align-items-center justify-content-between">
-                                    <div class="caption fw-semibold">
-                                        Caption Title
-                                    </div>
-                                    <button class="btn btn-sm fav-btn">
-                                        <i class="fa-regular fa-heart"></i>
-                                    </button>
-                                </div>
-                                <div class="card-hover-content__footer d-flex align-items-center justify-content-between">
-                                    <div class="author d-flex align-items-center gap-2">
-                                        <img src="assets/images/profile-pic.jpg" class="rounded-circle d-block"
-                                            alt="" />
-                                        <div>
-                                            <h6 class="mb-0 fw-semibold">
-                                                <a href="#" class="text-decoration-none">Tarikul Islam</a>
-                                            </h6>
-                                            <small class="d-block"><i class="fa-solid fa-award"></i>
-                                                popular</small>
-                                        </div>
-                                    </div>
-                                    <button class="btn download-btn">
-                                        <i class="fa-solid fa-download"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-3 grid-item">
-                        <div class="img-card">
-                            <img class="img-fluid" src="assets/images/gallery-images/image (4).jpg" alt="" />
-                            <div class="card-hover-content p-2 d-flex flex-column text-white show-modal">
-                                <div class="card-hover-content__header d-flex align-items-center justify-content-between">
-                                    <div class="caption fw-semibold">
-                                        Caption Title
-                                    </div>
-                                    <button class="btn btn-sm fav-btn">
-                                        <i class="fa-regular fa-heart"></i>
-                                    </button>
-                                </div>
-                                <div class="card-hover-content__footer d-flex align-items-center justify-content-between">
-                                    <div class="author d-flex align-items-center gap-2">
-                                        <img src="assets/images/profile-pic.jpg" class="rounded-circle d-block"
-                                            alt="" />
-                                        <div>
-                                            <h6 class="mb-0 fw-semibold">
-                                                <a href="#" class="text-decoration-none">Tarikul Islam</a>
-                                            </h6>
-                                            <small class="d-block"><i class="fa-solid fa-award"></i>
-                                                popular</small>
-                                        </div>
-                                    </div>
-                                    <button class="btn download-btn">
-                                        <i class="fa-solid fa-download"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-3 grid-item">
-                        <div class="img-card">
-                            <img class="img-fluid" src="assets/images/gallery-images/image (5).jpg" alt="" />
-                            <div class="card-hover-content p-2 d-flex flex-column text-white show-modal">
-                                <div class="card-hover-content__header d-flex align-items-center justify-content-between">
-                                    <div class="caption fw-semibold">
-                                        Caption Title
-                                    </div>
-                                    <button class="btn btn-sm fav-btn">
-                                        <i class="fa-regular fa-heart"></i>
-                                    </button>
-                                </div>
-                                <div class="card-hover-content__footer d-flex align-items-center justify-content-between">
-                                    <div class="author d-flex align-items-center gap-2">
-                                        <img src="assets/images/profile-pic.jpg" class="rounded-circle d-block"
-                                            alt="" />
-                                        <div>
-                                            <h6 class="mb-0 fw-semibold">
-                                                <a href="#" class="text-decoration-none">Tarikul Islam</a>
-                                            </h6>
-                                            <small class="d-block"><i class="fa-solid fa-award"></i>
-                                                popular</small>
-                                        </div>
-                                    </div>
-                                    <button class="btn download-btn">
-                                        <i class="fa-solid fa-download"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-3 grid-item">
-                        <div class="img-card">
-                            <img class="img-fluid" src="assets/images/gallery-images/image (6).jpg" alt="" />
-                            <div class="card-hover-content p-2 d-flex flex-column text-white show-modal">
-                                <div class="card-hover-content__header d-flex align-items-center justify-content-between">
-                                    <div class="caption fw-semibold">
-                                        Caption Title
-                                    </div>
-                                    <button class="btn btn-sm fav-btn">
-                                        <i class="fa-regular fa-heart"></i>
-                                    </button>
-                                </div>
-                                <div class="card-hover-content__footer d-flex align-items-center justify-content-between">
-                                    <div class="author d-flex align-items-center gap-2">
-                                        <img src="assets/images/profile-pic.jpg" class="rounded-circle d-block"
-                                            alt="" />
-                                        <div>
-                                            <h6 class="mb-0 fw-semibold">
-                                                <a href="#" class="text-decoration-none">Tarikul Islam</a>
-                                            </h6>
-                                            <small class="d-block"><i class="fa-solid fa-award"></i>
-                                                popular</small>
-                                        </div>
-                                    </div>
-                                    <button class="btn download-btn">
-                                        <i class="fa-solid fa-download"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-3 grid-item">
-                        <div class="img-card">
-                            <img class="img-fluid" src="assets/images/gallery-images/image (7).jpg" alt="" />
-                            <div class="card-hover-content p-2 d-flex flex-column text-white show-modal">
-                                <div class="card-hover-content__header d-flex align-items-center justify-content-between">
-                                    <div class="caption fw-semibold">
-                                        Caption Title
-                                    </div>
-                                    <button class="btn btn-sm fav-btn">
-                                        <i class="fa-regular fa-heart"></i>
-                                    </button>
-                                </div>
-                                <div class="card-hover-content__footer d-flex align-items-center justify-content-between">
-                                    <div class="author d-flex align-items-center gap-2">
-                                        <img src="assets/images/profile-pic.jpg" class="rounded-circle d-block"
-                                            alt="" />
-                                        <div>
-                                            <h6 class="mb-0 fw-semibold">
-                                                <a href="#" class="text-decoration-none">Tarikul Islam</a>
-                                            </h6>
-                                            <small class="d-block"><i class="fa-solid fa-award"></i>
-                                                popular</small>
-                                        </div>
-                                    </div>
-                                    <button class="btn download-btn">
-                                        <i class="fa-solid fa-download"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-3 grid-item">
-                        <div class="img-card">
-                            <img class="img-fluid" src="assets/images/gallery-images/image (8).jpg" alt="" />
-                            <div class="card-hover-content p-2 d-flex flex-column text-white show-modal">
-                                <div class="card-hover-content__header d-flex align-items-center justify-content-between">
-                                    <div class="caption fw-semibold">
-                                        Caption Title
-                                    </div>
-                                    <button class="btn btn-sm fav-btn">
-                                        <i class="fa-regular fa-heart"></i>
-                                    </button>
-                                </div>
-                                <div class="card-hover-content__footer d-flex align-items-center justify-content-between">
-                                    <div class="author d-flex align-items-center gap-2">
-                                        <img src="assets/images/profile-pic.jpg" class="rounded-circle d-block"
-                                            alt="" />
-                                        <div>
-                                            <h6 class="mb-0 fw-semibold">
-                                                <a href="#" class="text-decoration-none">Tarikul Islam</a>
-                                            </h6>
-                                            <small class="d-block"><i class="fa-solid fa-award"></i>
-                                                popular</small>
-                                        </div>
-                                    </div>
-                                    <button class="btn download-btn">
-                                        <i class="fa-solid fa-download"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-3 grid-item">
-                        <div class="img-card">
-                            <img class="img-fluid" src="assets/images/gallery-images/image (9).jpg" alt="" />
-                            <div class="card-hover-content p-2 d-flex flex-column text-white show-modal">
-                                <div class="card-hover-content__header d-flex align-items-center justify-content-between">
-                                    <div class="caption fw-semibold">
-                                        Caption Title
-                                    </div>
-                                    <button class="btn btn-sm fav-btn">
-                                        <i class="fa-regular fa-heart"></i>
-                                    </button>
-                                </div>
-                                <div class="card-hover-content__footer d-flex align-items-center justify-content-between">
-                                    <div class="author d-flex align-items-center gap-2">
-                                        <img src="assets/images/profile-pic.jpg" class="rounded-circle d-block"
-                                            alt="" />
-                                        <div>
-                                            <h6 class="mb-0 fw-semibold">
-                                                <a href="#" class="text-decoration-none">Tarikul Islam</a>
-                                            </h6>
-                                            <small class="d-block"><i class="fa-solid fa-award"></i>
-                                                popular</small>
-                                        </div>
-                                    </div>
-                                    <button class="btn download-btn">
-                                        <i class="fa-solid fa-download"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-3 grid-item">
-                        <div class="img-card">
-                            <img class="img-fluid" src="assets/images/gallery-images/image (10).jpg" alt="" />
-                            <div class="card-hover-content p-2 d-flex flex-column text-white show-modal">
-                                <div class="card-hover-content__header d-flex align-items-center justify-content-between">
-                                    <div class="caption fw-semibold">
-                                        Caption Title
-                                    </div>
-                                    <button class="btn btn-sm fav-btn">
-                                        <i class="fa-regular fa-heart"></i>
-                                    </button>
-                                </div>
-                                <div class="card-hover-content__footer d-flex align-items-center justify-content-between">
-                                    <div class="author d-flex align-items-center gap-2">
-                                        <img src="assets/images/profile-pic.jpg" class="rounded-circle d-block"
-                                            alt="" />
-                                        <div>
-                                            <h6 class="mb-0 fw-semibold">
-                                                <a href="#" class="text-decoration-none">Tarikul Islam</a>
-                                            </h6>
-                                            <small class="d-block"><i class="fa-solid fa-award"></i>
-                                                popular</small>
-                                        </div>
-                                    </div>
-                                    <button class="btn download-btn">
-                                        <i class="fa-solid fa-download"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-3 grid-item">
-                        <div class="img-card">
-                            <img class="img-fluid" src="assets/images/gallery-images/image (11).jpg" alt="" />
-                            <div class="card-hover-content p-2 d-flex flex-column text-white show-modal">
-                                <div class="card-hover-content__header d-flex align-items-center justify-content-between">
-                                    <div class="caption fw-semibold">
-                                        Caption Title
-                                    </div>
-                                    <button class="btn btn-sm fav-btn">
-                                        <i class="fa-regular fa-heart"></i>
-                                    </button>
-                                </div>
-                                <div class="card-hover-content__footer d-flex align-items-center justify-content-between">
-                                    <div class="author d-flex align-items-center gap-2">
-                                        <img src="assets/images/profile-pic.jpg" class="rounded-circle d-block"
-                                            alt="" />
-                                        <div>
-                                            <h6 class="mb-0 fw-semibold">
-                                                <a href="#" class="text-decoration-none">Tarikul Islam</a>
-                                            </h6>
-                                            <small class="d-block"><i class="fa-solid fa-award"></i>
-                                                popular</small>
-                                        </div>
-                                    </div>
-                                    <button class="btn download-btn">
-                                        <i class="fa-solid fa-download"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-3 grid-item">
-                        <div class="img-card">
-                            <img class="img-fluid" src="assets/images/gallery-images/image (12).jpg" alt="" />
-                            <div class="card-hover-content p-2 d-flex flex-column text-white show-modal">
-                                <div class="card-hover-content__header d-flex align-items-center justify-content-between">
-                                    <div class="caption fw-semibold">
-                                        Caption Title
-                                    </div>
-                                    <button class="btn btn-sm fav-btn">
-                                        <i class="fa-regular fa-heart"></i>
-                                    </button>
-                                </div>
-                                <div class="card-hover-content__footer d-flex align-items-center justify-content-between">
-                                    <div class="author d-flex align-items-center gap-2">
-                                        <img src="assets/images/profile-pic.jpg" class="rounded-circle d-block"
-                                            alt="" />
-                                        <div>
-                                            <h6 class="mb-0 fw-semibold">
-                                                <a href="#" class="text-decoration-none">Tarikul Islam</a>
-                                            </h6>
-                                            <small class="d-block"><i class="fa-solid fa-award"></i>
-                                                popular</small>
-                                        </div>
-                                    </div>
-                                    <button class="btn download-btn">
-                                        <i class="fa-solid fa-download"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div id="loadData" class="mansonry-grid row g-4 overflow-hidden">
 
-                <!-- Pagination -->
-                <a class="btn btn-primary w-100 mt-4 py-2 d-none" href="#" role="button">Continue Browsing with
-                    Gallery
-                    <i class="fa-solid fa-arrow-right-long ms-2"></i></a>
+                </div>
 
                 <!-- Load More Btn -->
                 <div class="text-center mt-4 pt-2 d-flex align-items-center justify-content-between gap-3">
                     <hr class="border border-primary border-1 opacity-25 w-100" />
-                    <button class="btn btn-outline-primary rounded-circle loadmore-btn shadow">
+                    <button id="load_more_button" class="btn btn-outline-primary rounded-circle loadmore-btn shadow">
                         <span class="d-block">Load</span>
                         <span class="d-block">More</span>
                     </button>
@@ -432,4 +56,219 @@
         </section>
     </main>
 
+    @include('_show-modal')
+
+@endsection
+
+
+@section('scripts')
+    <script>
+        /*
+         *   Load More Pictures
+         *
+         *   @ loadMoreData function call
+         *   @ load_more_button click
+         */
+        function loadMoreData(id = 0) {
+            axios.post('{{ route('load-picture') }}', {
+                    id: id
+                })
+                .then(res => {
+                    //console.log(res)
+                    $('#dataElement').remove();
+
+                    $(".mansonry-grid").append(res.data);
+                    $(".mansonry-grid").imagesLoaded(function() {
+                        $(".mansonry-grid").masonry("reloadItems").masonry("layout");
+                    })
+
+                    // $('#loadData').append(res.data);
+                    $('#load_more_button').html('<span class="d-block">Load</span><span class="d-block">More</span>');
+                    var haveData = $('#dataElement').data('have');
+                    if (haveData === false) {
+                        $('#load_more_button').addClass('d-none');
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                })
+        }
+        loadMoreData(0);
+
+        // Load More Button
+        $(document).on('click', '#load_more_button', function() {
+            var haveData = $('#dataElement').data('have');
+
+            if (haveData === true) {
+                var id = $('#dataElement').data('id');
+                $('#load_more_button').html('<b>Loading</b>');
+                loadMoreData(id);
+            } else {
+                $('#load_more_button').addClass('d-none');
+            }
+        });
+    </script>
+
+
+    <script>
+        /*
+         *   Show Picture Modal with Data Render
+         * 
+         *   @pictureShowModal Modal
+         *   @dataRenderOnModal DataRedering
+         * 
+         * */
+
+        // Modal Initialization
+        const showModal = new bootstrap.Modal('#pictureShowModal');
+
+        // Data Renering when load modal
+        function dataRenderOnModal(picture) {
+            let user = picture.user;
+            let tags = picture.tags;
+            let related_pictures = picture.related;
+
+            if (user.picture) {
+                $('#pictureShowModal #userImg').attr('src', '/storage/' + user.picture);
+            }
+
+            $('#pictureShowModal #userName').html(user.first_name + ' ' + user.last_name);
+            $('#pictureShowModal #downloadBtn').attr('href', '/download/' + picture.slug);
+            $('#pictureShowModal #pictureImg').attr('src', '/storage/' + picture.picture);
+            $('#pictureShowModal #pictureImg').attr('alt', picture.title);
+            $('#pictureShowModal #pictureTitle').html(picture.title);
+            $('#pictureShowModal #pictureViews').html(picture.views);
+            $('#pictureShowModal #pictureDownloads').html(picture.downloads);
+            $('#pictureShowModal #pictureFavs').html(picture.favorites_count);
+            $('#pictureShowModal #picturePublished').html(picture.created_at);
+            $('#pictureShowModal #modalFavBtn').attr('data-id', picture.id);
+            $('#pictureShowModal #showInPageLink').attr('href', '/gallery/' + picture.slug);
+            $('#pictureShowModal #pictureShareLink').attr('data-link', window.location.origin + '/gallery/' + picture.slug);
+
+            if (picture.favorite) {
+                $('#pictureShowModal #modalFavBtn').html('<i class="fa-solid fa-heart "></i>');
+            } else {
+                $('#pictureShowModal #modalFavBtn').html('<i class="fa-regular fa-heart "></i>');
+            }
+
+            if (picture.description) {
+                $('#pictureShowModal #pictureDescription').removeClass('d-none');
+                $('#pictureShowModal #pictureDescription p').html(picture.description);
+            }
+
+            $('#pictureTags').empty();
+            $.each(tags, function(index, tag) {
+                $('#pictureTags').append(
+                    '<a class="badge rounded-pill" href="#" role="button">' + tag.name + '</a>'
+                );
+            });
+
+
+            // Render Related Pictures
+            $('#relatedModalPicturesGrid').empty();
+            $.each(related_pictures, function(index, related_picture) {
+                let item = `
+                    <div class="col-sm-6 col-xl-3 grid-item">
+                        <div class="img-card">
+                            <a href="javascript:void(0);" class="image-wrapper-link d-block showModalRelateBtn"
+                                 data-id="${related_picture.id}">
+                                <img class="img-fluid" src="/storage/${related_picture.picture}"
+                                    alt="${related_picture.title}" style="width: 100%; height: 250px; object-fit: cover" />
+                            </a>
+                            <div class="card-hover-content p-2 d-flex flex-column text-white">
+                                <div
+                                    class="card-hover-content__header d-flex align-items-center justify-content-between">
+                                    <div class="caption fw-semibold">
+                                        ${related_picture.title}
+                                    </div>
+                                </div>
+                                <div
+                                    class="card-hover-content__footer d-flex align-items-center justify-content-between">
+                                    <div class="author d-flex align-items-center gap-2">
+                                        <img src="${related_picture.user.picture ? related_picture.user.picture : '/assets/images/profile-placeholder.jpg'}"
+                                            class="rounded-circle d-block" alt="" />
+                                        <div>
+                                            <h6 class="mb-0 fw-semibold">
+                                                <a href="#" class="text-decoration-none">${related_picture.user.first_name + ' '+ related_picture.user.last_name}</a>
+                                            </h6>
+                                            <small class="d-block"><i class="fa-solid fa-award"></i>
+                                                popular</small>
+                                        </div>
+                                    </div>
+                                    <a href="/download/${related_picture.slug}" class="btn download-btn">
+                                        <i class="fa-solid fa-download"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+                $('#relatedModalPicturesGrid').append(item);
+            });
+
+
+            // Related Picture Click Render Elements Again
+            $('.showModalRelateBtn').on('click', function() {
+
+                let id = $(this).data('id');
+                $('#pictureId').html(id);
+
+                let pictureId = $('#pictureId').html();
+
+                axios.get('/getPictureById/' + pictureId)
+                    .then(res => {
+                        if (res.data) {
+                            dataRenderOnModal(res.data);
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    })
+            });
+
+        }
+
+        // Show Modal By onClick Picture
+        $(document).on('click', '.showModalBtn', function(e) {
+            e.preventDefault();
+
+            let id = $(this).data('id');
+            $('#pictureId').html(id);
+
+            showModal.show();
+
+            let pictureId = $('#pictureId').html();
+
+            axios.get('/getPictureById/' + pictureId)
+                .then(res => {
+                    if (res.data) {
+                        dataRenderOnModal(res.data);
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                })
+
+        });
+
+
+        // Modal Data Reset on hidden modal
+        $('#pictureShowModal').on('hidden.bs.modal', function() {
+            $('#pictureShowModal #userImg').attr('src', '/assets/images/profile-placeholder.jpg');
+            $('#pictureShowModal #pictureImg').attr('src', '/assets/images/picture-placeholder.jpg');
+
+            $('#pictureShowModal #userName').html('..');
+            $('#pictureShowModal #downloadBtn').attr('href', '');
+            $('#pictureShowModal #pictureImg').attr('alt', '..');
+            $('#pictureShowModal #pictureTitle').html('...');
+            $('#pictureShowModal #pictureViews').html('..');
+            $('#pictureShowModal #pictureDownloads').html('..');
+            $('#pictureShowModal #pictureFavs').html('..');
+            $('#pictureShowModal #picturePublished').html('...');
+            $('#pictureShowModal #pictureDescription').addClass('d-none');
+            $('#pictureShowModal #pictureDescription p').html('...');
+
+            $('#relatedModalPicturesGrid').empty();
+        });
+    </script>
 @endsection

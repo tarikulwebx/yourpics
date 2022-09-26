@@ -169,11 +169,15 @@ class PictureController extends Controller
         $picture['related'] = $related;
         $picture['favorites_count'] = $picture->favorites()->count();
 
-        if (Auth::user()->favorites()->where('picture_id', '=', $id)->count() > 0) {
-            $picture['favorite'] = true;
-        } else {
+        if (Auth::guest()) {
             $picture['favorite'] = false;
+        } else {
+            if (Auth::user()->favorites()->where('picture_id', '=', $id)->count() > 0) {
+                $picture['favorite'] = true;
+            }
         }
+
+        // dd($picture);
 
         // $related_pictures = Picture::whereHas('tags', function ($query) use ($picture) {
         //     $tagIds = $picture->tags()->pluck('tags.id')->all();

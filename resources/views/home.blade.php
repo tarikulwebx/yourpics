@@ -269,10 +269,6 @@
                 </div>
                 {{-- {{ $pictures->links() }} --}}
 
-                <!-- Pagination -->
-                <a class="btn btn-primary w-100 mt-4 py-2 d-none" href="#" role="button">Continue Browsing with
-                    Gallery
-                    <i class="fa-solid fa-arrow-right-long ms-2"></i></a>
 
                 <!-- Load More Btn -->
                 <div class="text-center mt-4 pt-2 d-flex align-items-center justify-content-between gap-3">
