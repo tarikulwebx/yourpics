@@ -220,60 +220,17 @@
         <!--~~~~~~~~~~ GALLERY SECTION ~~~~~~~~~~~-->
         <section id="gallery-section" class="gallery-section">
             <div class="container-xl">
-                <div id="loadData" class="mansonry-grid row g-4 overflow-hidden">
-                    {{-- @foreach ($pictures as $picture)
-                        <!-- Picture Item -->
-                        <div class="col-sm-6 col-md-4 col-lg-3 grid-item">
-                            <div class="img-card">
-                                <a href="#" class="image-wrapper-link d-block showModalBtn"
-                                    data-id="{{ $picture->id }}">
-                                    <img class="img-fluid" src="{{ $picture->picture_url }}"
-                                        alt="{{ $picture->title }}" />
-                                </a>
-                                <div class="card-hover-content p-2 d-flex flex-column text-white">
-                                    <div
-                                        class="card-hover-content__header d-flex align-items-center justify-content-between">
-                                        <div class="caption fw-semibold">
-                                            {{ $picture->title }}
-                                        </div>
-                                        @auth
-                                            <button class="btn fav-btn">
-                                                <i class="fa-regular fa-heart"></i>
-                                            </button>
-                                        @endauth
-
-                                    </div>
-                                    <div
-                                        class="card-hover-content__footer d-flex align-items-center justify-content-between">
-                                        <div class="author d-flex align-items-center gap-2">
-                                            <img src="{{ $picture->user->picture_url }}" class="rounded-circle d-block"
-                                                alt=".." />
-                                            <div>
-                                                <h6 class="mb-0 fw-semibold">
-                                                    <a href="#"
-                                                        class="text-decoration-none">{{ $picture->user->full_name }}</a>
-                                                </h6>
-                                                <small class="d-block"><i class="fa-solid fa-award"></i>
-                                                    popular</small>
-                                            </div>
-                                        </div>
-                                        <a href="{{ route('download', $picture->slug) }}" class="btn download-btn">
-                                            <i class="fa-solid fa-download"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach --}}
+                <div id="galleryContainer" class="mansonry-grid row g-4 overflow-hidden">
 
                 </div>
-                {{-- {{ $pictures->links() }} --}}
-
+                <h5 class="text-center loading text-primary fw-bold mt-4">Loading...</h5>
+                <p id="noMorePictureAlert" class="d-none text-center mt-3">No more pictures...</p>
 
                 <!-- Load More Btn -->
                 <div class="text-center mt-4 pt-2 d-flex align-items-center justify-content-between gap-3">
                     <hr class="border border-primary border-1 opacity-25 w-100" />
-                    <button id="load_more_button" class="btn btn-outline-primary rounded-circle loadmore-btn shadow">
+                    <button id="loadMorePictureBtn" class="btn btn-outline-primary rounded-circle loadmore-btn shadow"
+                        data-paginate="2">
                         <span class="d-block">Load</span>
                         <span class="d-block">More</span>
                     </button>
@@ -297,44 +254,51 @@
          *   @ loadMoreData function call
          *   @ load_more_button click
          */
-        function loadMoreData(id = 0) {
-            axios.post('{{ route('load-picture') }}', {
-                    id: id
-                })
-                .then(res => {
-                    //console.log(res)
-                    $('#dataElement').remove();
 
-                    $(".mansonry-grid").append(res.data);
-                    $(".mansonry-grid").imagesLoaded(function() {
-                        $(".mansonry-grid").masonry("reloadItems").masonry("layout");
-                    })
 
-                    // $('#loadData').append(res.data);
-                    $('#load_more_button').html('<span class="d-block">Load</span><span class="d-block">More</span>');
-                    var haveData = $('#dataElement').data('have');
-                    if (haveData === false) {
-                        $('#load_more_button').addClass('d-none');
+        var paginate = 1;
+        loadMoreData(paginate); // first load
+
+        // Load after button click
+        $('#loadMorePictureBtn').click(function() {
+            var page = $(this).data('paginate');
+            loadMoreData(page);
+            $(this).data('paginate', page + 1);
+        });
+
+
+
+        // Load Data on Container
+        function loadMoreData(paginate) {
+            $.ajax({
+                    url: '?page=' + paginate,
+                    type: 'get',
+                    datatype: 'html',
+                    beforeSend: function() {
+                        $('.loading').show();
                     }
                 })
-                .catch(err => {
-                    console.error(err);
+                .done(function(data) {
+                    if (data.length == 0) {
+                        $('#noMorePictureAlert').removeClass('d-none');
+                        $('#loadMorePictureBtn').hide();
+                        $('.loading').hide();
+                        return;
+                    } else {
+                        $('.loading').hide();
+
+                        $("#galleryContainer").append(data);
+                        $("#galleryContainer").imagesLoaded(function() {
+                            $("#galleryContainer").masonry("reloadItems").masonry("layout");
+                        })
+
+                        // $('#galleryContainer').append(data);
+                    }
                 })
+                .fail(function(jqXHR, ajaxOptions, thrownError) {
+                    console.log('Something went wrong.');
+                });
         }
-        loadMoreData(0);
-
-        // Load More Button
-        $(document).on('click', '#load_more_button', function() {
-            var haveData = $('#dataElement').data('have');
-
-            if (haveData === true) {
-                var id = $('#dataElement').data('id');
-                $('#load_more_button').html('<b>Loading</b>');
-                loadMoreData(id);
-            } else {
-                $('#load_more_button').addClass('d-none');
-            }
-        });
     </script>
 
 

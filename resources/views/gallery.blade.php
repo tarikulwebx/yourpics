@@ -14,19 +14,20 @@
                             <i class="fa-solid fa-grip text-secondary ms-1"></i>
                         </h3>
                     </div>
-                    <form action="">
+                    <form id="searchForm" method="GET">
                         <div class="d-flex flex-column flex-sm-row gap-3">
-                            <div class="select-input-wrapper shadow-sm rounded-1">
+                            {{-- <div class="select-input-wrapper shadow-sm rounded-1">
                                 <select class="select2-tags form-control w-100" name="tags">
+                                    <option></option>
                                     <option value="tag1">Tag one</option>
                                     <option value="tag2">Tag two</option>
                                     <option value="tag3">Tag three</option>
                                 </select>
-                            </div>
+                            </div> --}}
                             <div class="input-group shadow-sm rounded-1 search-input-group">
-                                <input type="search" class="form-control shadow-none" placeholder="Search..."
-                                    aria-label="Recipient's username with two button addons" />
-                                <button class="btn btn-primary" type="button">
+                                <input id="searchInput" type="text" name="search" class="form-control shadow-none"
+                                    value="{{ request()->get('search') }}" placeholder="Search..." aria-label="Search" />
+                                <button id="searchBtn" class="btn btn-primary" type="submit">
                                     Search
                                 </button>
                             </div>
@@ -39,19 +40,66 @@
         <!--~~~~~~~~~~ GALLERY SECTION ~~~~~~~~~~~-->
         <section id="gallery-section" class="gallery-section">
             <div class="container-xl">
-                <div id="loadData" class="mansonry-grid row g-4 overflow-hidden">
+                <div class="mansonry-grid row g-4 overflow-hidden">
+                    @if ($pictures)
+                        @foreach ($pictures as $picture)
+                            <div class="col-sm-6 col-md-4 col-lg-3 grid-item">
+                                <div class="img-card">
+                                    <a href="#" class="image-wrapper-link d-block showModalBtn"
+                                        data-id="{{ $picture->id }}">
+                                        <img class="img-fluid" src="{{ $picture->picture_url }}"
+                                            alt="{{ $picture->title }}" />
+                                    </a>
+                                    <div class="card-hover-content p-2 d-flex flex-column text-white">
+                                        <div
+                                            class="card-hover-content__header d-flex align-items-center justify-content-between">
+                                            <div class="caption fw-semibold">
+                                                {{ $picture->title }}
+                                            </div>
+                                            @guest
+                                                <button class="btn fav-btn" data-id="{{ $picture->id }}">
+                                                    <i class="fa-regular fa-heart"></i>
+                                                </button>
+                                            @elseif (Auth::user()->favorites()->where('picture_id', '=', $picture->id)->count() > 0)
+                                                <button class="btn fav-btn text-white" data-id="{{ $picture->id }}">
+                                                    <i class="fa-solid fa-heart "></i>
+                                                </button>
+                                            @else
+                                                <button class="btn fav-btn" data-id="{{ $picture->id }}">
+                                                    <i class="fa-regular fa-heart"></i>
+                                                </button>
+                                            @endguest
+                                        </div>
+                                        <div
+                                            class="card-hover-content__footer d-flex align-items-center justify-content-between">
+                                            <div class="author d-flex align-items-center gap-2">
+                                                <img src="{{ $picture->user->picture_url }}" class="rounded-circle d-block"
+                                                    alt=".." />
+                                                <div>
+                                                    <h6 class="mb-0 fw-semibold">
+                                                        <a href="#"
+                                                            class="text-decoration-none">{{ $picture->user->full_name }}</a>
+                                                    </h6>
+                                                    <small class="d-block text-light"><i class="fa-solid fa-award"></i>
+                                                        popular</small>
+                                                </div>
+                                            </div>
+                                            <a href="{{ route('download', $picture->slug) }}" class="btn download-btn">
+                                                <i class="fa-solid fa-download"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
 
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
 
-                <!-- Load More Btn -->
-                <div class="text-center mt-4 pt-2 d-flex align-items-center justify-content-between gap-3">
-                    <hr class="border border-primary border-1 opacity-25 w-100" />
-                    <button id="load_more_button" class="btn btn-outline-primary rounded-circle loadmore-btn shadow">
-                        <span class="d-block">Load</span>
-                        <span class="d-block">More</span>
-                    </button>
-                    <hr class="border border-primary border-1 opacity-25 w-100" />
-                </div>
+                @if ($pictures->count() < 1)
+                    <p class="text-center mt-4">No pictures found</p>
+                @endif
+                {{ $pictures->links() }}
             </div>
         </section>
     </main>
@@ -62,53 +110,6 @@
 
 
 @section('scripts')
-    <script>
-        /*
-         *   Load More Pictures
-         *
-         *   @ loadMoreData function call
-         *   @ load_more_button click
-         */
-        function loadMoreData(id = 0) {
-            axios.post('{{ route('load-picture') }}', {
-                    id: id
-                })
-                .then(res => {
-                    //console.log(res)
-                    $('#dataElement').remove();
-
-                    $(".mansonry-grid").append(res.data);
-                    $(".mansonry-grid").imagesLoaded(function() {
-                        $(".mansonry-grid").masonry("reloadItems").masonry("layout");
-                    })
-
-                    // $('#loadData').append(res.data);
-                    $('#load_more_button').html('<span class="d-block">Load</span><span class="d-block">More</span>');
-                    var haveData = $('#dataElement').data('have');
-                    if (haveData === false) {
-                        $('#load_more_button').addClass('d-none');
-                    }
-                })
-                .catch(err => {
-                    console.error(err);
-                })
-        }
-        loadMoreData(0);
-
-        // Load More Button
-        $(document).on('click', '#load_more_button', function() {
-            var haveData = $('#dataElement').data('have');
-
-            if (haveData === true) {
-                var id = $('#dataElement').data('id');
-                $('#load_more_button').html('<b>Loading</b>');
-                loadMoreData(id);
-            } else {
-                $('#load_more_button').addClass('d-none');
-            }
-        });
-    </script>
-
 
     <script>
         /*

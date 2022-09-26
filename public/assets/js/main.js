@@ -21,6 +21,7 @@ $(document).ready(function() {
         $(".mansonry-grid").masonry({
             itemSelector: '.grid-item',
             columnWidth: '.grid-item',
+            // transitionDuration: 0
         });
     });
     
