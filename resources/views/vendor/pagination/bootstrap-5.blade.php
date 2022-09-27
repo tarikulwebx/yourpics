@@ -1,33 +1,34 @@
 @if ($paginator->hasPages())
-    <nav class="d-flex justify-items-center justify-content-between align-items-center mt-3">
-        <div class="d-flex justify-content-between flex-fill d-sm-none">
-            <ul class="pagination">
+    <nav class="pagination-wrapper d-flex justify-items-center justify-content-between align-items-center mt-4 pt-3">
+        <div class="d-flex justify-content-between flex-fill d-md-none">
+            <ul class="pagination d-flex justify-content-between w-100">
                 {{-- Previous Page Link --}}
                 @if ($paginator->onFirstPage())
                     <li class="page-item disabled" aria-disabled="true">
-                        <span class="page-link">@lang('pagination.previous')</span>
+                        <span class="page-link"><i class="fa-solid fa-angle-left me-1"></i> @lang('pagination.previous')</span>
                     </li>
                 @else
                     <li class="page-item">
-                        <a class="page-link" href="{{ $paginator->previousPageUrl() }}"
-                            rel="prev">@lang('pagination.previous')</a>
+                        <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev"><i
+                                class="fa-solid fa-angle-left me-1"></i> @lang('pagination.previous')</a>
                     </li>
                 @endif
 
                 {{-- Next Page Link --}}
                 @if ($paginator->hasMorePages())
                     <li class="page-item">
-                        <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next">@lang('pagination.next')</a>
+                        <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next">@lang('pagination.next') <i
+                                class="fa-solid fa-angle-right ms-1"></i></a>
                     </li>
                 @else
                     <li class="page-item disabled" aria-disabled="true">
-                        <span class="page-link">@lang('pagination.next')</span>
+                        <span class="page-link">@lang('pagination.next') <i class="fa-solid fa-angle-right ms-1"></i></span>
                     </li>
                 @endif
             </ul>
         </div>
 
-        <div class="d-none flex-sm-fill d-sm-flex align-items-sm-center justify-content-sm-between">
+        <div class="d-none flex-md-fill d-md-flex align-items-md-center justify-content-md-between">
             <div>
                 <p class="small text-muted mb-0">
                     {!! __('Showing') !!}
@@ -41,16 +42,16 @@
             </div>
 
             <div>
-                <ul class="pagination">
+                <ul class="pagination pagination-large-device mb-0">
                     {{-- Previous Page Link --}}
                     @if ($paginator->onFirstPage())
                         <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
-                            <span class="page-link" aria-hidden="true">&lsaquo;</span>
+                            <span class="page-link" aria-hidden="true"><i class="fa-solid fa-angle-left"></i></span>
                         </li>
                     @else
                         <li class="page-item">
                             <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev"
-                                aria-label="@lang('pagination.previous')">&lsaquo;</a>
+                                aria-label="@lang('pagination.previous')"><i class="fa-solid fa-angle-left"></i></a>
                         </li>
                     @endif
 
@@ -80,11 +81,11 @@
                     @if ($paginator->hasMorePages())
                         <li class="page-item">
                             <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next"
-                                aria-label="@lang('pagination.next')">&rsaquo;</a>
+                                aria-label="@lang('pagination.next')"><i class="fa-solid fa-angle-right"></i></a>
                         </li>
                     @else
                         <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
-                            <span class="page-link" aria-hidden="true">&rsaquo;</span>
+                            <span class="page-link" aria-hidden="true"><i class="fa-solid fa-angle-right"></i></span>
                         </li>
                     @endif
                 </ul>

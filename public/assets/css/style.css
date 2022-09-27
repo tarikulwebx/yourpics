@@ -11315,25 +11315,11 @@ textarea.form-control-lg {
   color: #6f42c1;
 }
 
-@media (min-width: 768px) {
-  .filter-section .select-input-wrapper {
-    width: 250px;
-  }
+.filter-section .search-input-group .form-control {
+  border-color: rgba(111, 66, 193, 0.4);
 }
-@media (max-width: 767.98px) {
-  .filter-section .select-input-wrapper {
-    width: 100%;
-  }
-}
-@media (min-width: 768px) {
-  .filter-section .search-input-group {
-    width: 280px;
-  }
-}
-@media (max-width: 767.98px) {
-  .filter-section .search-input-group {
-    width: 100%;
-  }
+.filter-section .search-input-group .form-control:focus {
+  border-color: rgba(111, 66, 193, 0.7);
 }
 .filter-section .search-input-group .form-control::-moz-placeholder {
   font-weight: 300;
@@ -11435,4 +11421,12 @@ textarea.form-control-lg {
 .section-404 h1 {
   font-size: 10rem;
   line-height: 1;
+}
+
+.pagination-wrapper .pagination-large-device .page-item {
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+}
+.pagination-wrapper .pagination-large-device .page-item .page-link {
+  border-radius: 50%;
 }/*# sourceMappingURL=style.css.map */

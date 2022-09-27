@@ -3,36 +3,51 @@
 @section('title', 'Gallery')
 
 @section('content')
-    <main class="py-4 my-2 px-sm-2">
+    <main class="mb-5">
         <!--~~~~~~~~ FILTER SECTION START ~~~~~~~~-->
-        <section class="filter-section mb-4">
-            <div class="container-xl">
-                <div class="d-flex align-items-md-center gap-3 justify-content-between flex-column flex-md-row">
-                    <div>
-                        <h3 class="mb-0 text-uppercase fw-bold text-primary">
+        <section class="filter-section mb-4 bg-light py-4 px-sm-2">
+            <div class="container-xl py-2 py-md-3">
+                <div class="row align-items-center gy-3">
+                    <div class="col-12 col-md-7 col-lg-8">
+                        <h2 class="mb-0 text-uppercase fw-bold text-primary">
                             Gallery
                             <i class="fa-solid fa-grip text-secondary ms-1"></i>
-                        </h3>
+                        </h2>
+                        <p class="mb-0">Found {{ $pictures->count() }} pictures</p>
                     </div>
-                    <form id="searchForm" method="GET">
-                        <div class="d-flex flex-column flex-sm-row gap-3">
-                            {{-- <div class="select-input-wrapper shadow-sm rounded-1">
-                                <select class="select2-tags form-control w-100" name="tags">
-                                    <option></option>
-                                    <option value="tag1">Tag one</option>
-                                    <option value="tag2">Tag two</option>
-                                    <option value="tag3">Tag three</option>
-                                </select>
-                            </div> --}}
-                            <div class="input-group shadow-sm rounded-1 search-input-group">
-                                <input id="searchInput" type="text" name="search" class="form-control shadow-none"
-                                    value="{{ request()->get('search') }}" placeholder="Search..." aria-label="Search" />
+                    <div class="col-12 col-md-5 col-lg-4">
+                        <form id="searchForm" method="GET">
+                            <div class="input-group search-input-group">
+                                <input type="text" name="search" class="form-control shadow-none py-2 px-3"
+                                    placeholder="Search..." value="{{ request()->get('search') }}" aria-label="search"
+                                    aria-describedby="search" />
                                 <button id="searchBtn" class="btn btn-primary" type="submit">
+                                    <i class="fa-solid fa-magnifying-glass me-1"></i>
                                     Search
                                 </button>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--~~~~~~~~~ TAG SECTION START ~~~~~~~~~~-->
+        <section class="tag-section mb-4">
+            <div class="container-xl">
+                <div class="tag-section-inner position-relative">
+                    <button class="btn btn-left">
+                        <i class="fa-solid fa-angle-left"></i>
+                    </button>
+                    <button class="btn btn-right">
+                        <i class="fa-solid fa-angle-right"></i>
+                    </button>
+                    <div class="tags-wrapper d-flex align-items-center gap-2 text-nowrap">
+                        @foreach ($tags as $tag)
+                            <a href="#"
+                                class="badge rounded-pill bg-primary bg-opacity-10 text-primary">{{ $tag->name }}</a>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </section>
