@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthorPictureController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
@@ -19,30 +20,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::post('/', [HomeController::class, 'loadMorePicture'])->name('load-picture');
-
-Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
-
-Route::get('/gallery/{slug}', [PictureController::class, 'singlePicture'])->name('singlePicture');
-
-// Pictures by Tag
-Route::get('/{slug}', [PictureController::class, 'picturesByTag'])->name('picturesByTag');
-
-
-// Download Image
-Route::get('/download/{slug}', [PictureController::class, 'download'])->name('download');
-Route::get('/getPictureById/{id}', [PictureController::class, 'getPictureById']);
-
-// Add to Favorite
-Route::post('/addToFavorite', [FavoriteController::class, 'addToFavorite']);
-
-
 Auth::routes();
-
 // Profile Routes
 Route::middleware(['auth', 'web'])->group(function () {
-    Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('/profile/{slug}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/{slug}', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/profile/getPictureById/{id}', [ProfileController::class, 'getPictureById']);
@@ -55,3 +36,25 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::put('/profile/{user_slug}/uploads/{picture_slug}/update', [PictureController::class, 'update'])->name('profile.uploads.update');
     Route::delete('/profile/deletePictureById/{id}', [PictureController::class, 'deletePictureById'])->name('profile.uploads.delete');
 });
+
+
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/', [HomeController::class, 'loadMorePicture'])->name('load-picture');
+
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
+
+Route::get('/gallery/{slug}', [PictureController::class, 'singlePicture'])->name('singlePicture');
+
+// Pictures by Tag
+Route::get('/{slug}', [PictureController::class, 'picturesByTag'])->name('picturesByTag');
+
+// Author Picture
+Route::get('/author/{slug}', [AuthorPictureController::class, 'index'])->name('author.index');
+
+// Download Image
+Route::get('/download/{slug}', [PictureController::class, 'download'])->name('download');
+Route::get('/getPictureById/{id}', [PictureController::class, 'getPictureById']);
+
+// Add to Favorite
+Route::post('/addToFavorite', [FavoriteController::class, 'addToFavorite']);

@@ -73,7 +73,7 @@ class HomeController extends Controller
                                             alt=".." />
                                         <div>
                                             <h6 class="mb-0 fw-semibold">
-                                                <a href="#"
+                                                <a href="' . route('author.index', $picture->user->slug) . '"
                                                     class="text-decoration-none">' . $picture->user->full_name . '</a>
                                             </h6>
                                             <small class="d-block text-light"><i class="fa-solid fa-award"></i>
