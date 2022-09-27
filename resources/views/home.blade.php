@@ -175,12 +175,12 @@
                     </div>
                     <div class="col-lg-5" style="margin-bottom: -3.75rem">
                         <div class="search-wrapper p-3 rounded shadow-sm w-100">
-                            <form action="">
+                            <form action="{{ route('gallery') }}" method="GET">
                                 <div class="input-group">
-                                    <input type="text" class="form-control shadow-none"
+                                    <input type="text" name="search" class="form-control shadow-none"
                                         placeholder="Search content..." aria-label="search input"
-                                        aria-describedby="basic-addon2" />
-                                    <span class="input-group-text p-0 m-0 border-0" id="basic-addon2">
+                                        aria-describedby="search" />
+                                    <span class="input-group-text p-0 m-0 border-0" id="search">
                                         <button class="btn btn-primary h-100 px-3" type="submit">
                                             <i class="fa-solid fa-magnifying-glass me-1"></i>
                                             Search
@@ -196,9 +196,9 @@
     </section>
 
 
-    <main class="py-5 px-sm-2">
+    <main class="py-4 mb-2 px-sm-2">
         <!--~~~~~~~~~ TAG SECTION START ~~~~~~~~~~-->
-        <section class="tag-section mb-4">
+        <section class="tag-section mb-4 mt-2">
             <div class="container-xl">
                 <div class="tag-section-inner position-relative">
                     <button class="btn btn-left">

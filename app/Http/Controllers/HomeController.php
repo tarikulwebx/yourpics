@@ -27,7 +27,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $pictures = Picture::with('user')->latest()->paginate(20);
-        $tags = Tag::all();
+        $tags = Tag::orderBy('name', 'asc')->get();
 
         if ($request->ajax()) {
             $html = '';
