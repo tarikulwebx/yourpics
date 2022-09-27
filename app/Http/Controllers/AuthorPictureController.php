@@ -12,12 +12,12 @@ class AuthorPictureController extends Controller
     public function index(Request $request, $slug)
     {
         $author = User::findBySlugOrFail($slug);
-        $uploaded_pictures = $author->pictures()->latest()->paginate(4, ['*'], 'uploads_page');
+        $uploaded_pictures = $author->pictures()->latest()->paginate(20, ['*'], 'uploads_page');
 
         $favIds = $author->favorites()->pluck('picture_id')->all();
         $favorite_pictures = Picture::where(function ($query) use ($favIds) {
             $query->whereIn('id', $favIds);
-        })->latest()->paginate(4, ['*'], 'favs_page');
+        })->latest()->paginate(20, ['*'], 'favs_page');
 
 
         if (isset($_GET['fav']) && $request->ajax()) {
