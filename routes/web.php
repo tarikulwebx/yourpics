@@ -26,6 +26,9 @@ Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
 Route::get('/gallery/{slug}', [PictureController::class, 'singlePicture'])->name('singlePicture');
 
+// Pictures by Tag
+Route::get('/{slug}', [PictureController::class, 'picturesByTag'])->name('picturesByTag');
+
 
 // Download Image
 Route::get('/download/{slug}', [PictureController::class, 'download'])->name('download');

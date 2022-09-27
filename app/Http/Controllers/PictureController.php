@@ -22,6 +22,20 @@ class PictureController extends Controller
         //
     }
 
+    /**
+     * Pictures by Tag 
+     */
+    public function picturesByTag(Request $request, $slug)
+    {
+        $tag = Tag::findBySlugOrFail($slug);
+        $tags = Tag::orderBy('name', 'asc')->get();
+        $pictures = $tag->pictures()->where(function ($query) use ($request) {
+            if ($request->search) {
+                $query->where('title', 'LIKE', '%' . $request->search . '%');
+            }
+        })->latest()->paginate(20);
+        return view('tag', compact('tag', 'pictures', 'tags'));
+    }
 
     /**
      * Single Picture Show

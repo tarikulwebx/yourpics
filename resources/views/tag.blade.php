@@ -9,11 +9,14 @@
             <div class="container-xl py-2 py-md-3">
                 <div class="row align-items-center gy-3">
                     <div class="col-12 col-md-7 col-lg-8">
+                        <p class="mb-0 text-uppercase fw-bold small text-secondary" style="letter-spacing: 0.2rem">
+                            Pictures by Tag
+                        </p>
                         <h2 class="mb-0 text-uppercase fw-bold text-primary">
-                            Gallery
-                            <i class="fa-solid fa-grip text-secondary ms-1"></i>
+                            {{ $tag->name }}
+                            <span class="text-secondary ms-1"><i
+                                    class="fa-solid fa-hashtag"></i>{{ $pictures->count() }}</span>
                         </h2>
-                        <p class="mb-0">Found {{ $pictures->count() }} pictures</p>
                     </div>
                     <div class="col-12 col-md-5 col-lg-4">
                         <form id="searchForm" method="GET">

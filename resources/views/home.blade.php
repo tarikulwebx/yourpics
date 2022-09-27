@@ -209,7 +209,7 @@
                     </button>
                     <div class="tags-wrapper d-flex align-items-center gap-2 text-nowrap">
                         @foreach ($tags as $tag)
-                            <a href="#"
+                            <a href="{{ route('picturesByTag', $tag->slug) }}"
                                 class="badge rounded-pill bg-primary bg-opacity-10 text-primary">{{ $tag->name }}</a>
                         @endforeach
                     </div>
