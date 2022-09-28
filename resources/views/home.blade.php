@@ -324,7 +324,8 @@
                 $('#pictureShowModal #userImg').attr('src', '/storage/' + user.picture);
             }
 
-            $('#pictureShowModal #userName').html(user.first_name + ' ' + user.last_name);
+            $('#pictureShowModal #userName').html(user.first_name + ' ' + user.last_name).attr('href', '/author/' + user
+                .slug);
             $('#pictureShowModal #downloadBtn').attr('href', '/download/' + picture.slug);
             $('#pictureShowModal #pictureImg').attr('src', '/storage/' + picture.picture);
             $('#pictureShowModal #pictureImg').attr('alt', picture.title);
@@ -338,7 +339,7 @@
             $('#pictureShowModal #pictureShareLink').attr('data-link', window.location.origin + '/gallery/' + picture.slug);
 
             if (picture.favorite) {
-                $('#pictureShowModal #modalFavBtn').html('<i class="fa-solid fa-heart "></i>');
+                $('#pictureShowModal #modalFavBtn').html('<i class="fa-solid fa-heart "></i>').attr('data-id', picture.id);
             } else {
                 $('#pictureShowModal #modalFavBtn').html('<i class="fa-regular fa-heart "></i>');
             }
@@ -351,7 +352,8 @@
             $('#pictureTags').empty();
             $.each(tags, function(index, tag) {
                 $('#pictureTags').append(
-                    '<a class="badge rounded-pill" href="#" role="button">' + tag.name + '</a>'
+                    '<a class="badge rounded-pill" href="/tag/' + tag.slug + '" role="button">' + tag.name +
+                    '</a>'
                 );
             });
 
@@ -381,7 +383,7 @@
                                             class="rounded-circle d-block" alt="" />
                                         <div>
                                             <h6 class="mb-0 fw-semibold">
-                                                <a href="#" class="text-decoration-none">${related_picture.user.first_name + ' '+ related_picture.user.last_name}</a>
+                                                <a href="/author/${related_picture.user.slug}" class="text-decoration-none">${related_picture.user.first_name + ' '+ related_picture.user.last_name}</a>
                                             </h6>
                                             <small class="d-block"><i class="fa-solid fa-award"></i>
                                                 popular</small>

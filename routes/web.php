@@ -47,7 +47,7 @@ Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 Route::get('/gallery/{slug}', [PictureController::class, 'singlePicture'])->name('singlePicture');
 
 // Pictures by Tag
-Route::get('/{slug}', [PictureController::class, 'picturesByTag'])->name('picturesByTag');
+Route::get('/tag/{slug}', [PictureController::class, 'picturesByTag'])->name('picturesByTag');
 
 // Author Picture
 Route::get('/author/{slug}', [AuthorPictureController::class, 'index'])->name('author.index');

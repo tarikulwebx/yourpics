@@ -1,5 +1,5 @@
 {{-- Success Toast --}}
-<div class="toast-container position-fixed bottom-0 start-0 p-3">
+<div class="toast-container position-fixed bottom-0 start-0 p-3" style="z-index: 9999;">
     <div id="successToast" class="toast  text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex align-items-center">
             <div class="toast-body fw-semibold d-flex">
@@ -14,7 +14,7 @@
 
 
 {{-- Failed Toast --}}
-<div class="toast-container position-fixed bottom-0 start-0 p-3">
+<div class="toast-container position-fixed bottom-0 start-0 p-3" style="z-index: 9999;">
     <div id="failedToast" class="toast  text-bg-danger border-0" role="alert" aria-live="assertive"
         aria-atomic="true">
         <div class="d-flex align-items-center">
@@ -29,7 +29,7 @@
 </div>
 
 {{-- Warning Toast --}}
-<div class="toast-container position-fixed bottom-0 start-0 p-3">
+<div class="toast-container position-fixed bottom-0 start-0 p-3" style="z-index: 9999;">
     <div id="warningToast" class="toast  text-bg-warning border-0" role="alert" aria-live="assertive"
         aria-atomic="true">
         <div class="d-flex align-items-center">

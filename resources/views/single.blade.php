@@ -14,24 +14,25 @@
                                 alt="{{ $picture->user->full_name }}" />
                             <div>
                                 <h6 class="mb-0 fw-semibold">
-                                    <a href="#" class="text-decoration-none">{{ $picture->user->full_name }}</a>
+                                    <a href="{{ route('author.index', $picture->user->slug) }}"
+                                        class="text-decoration-none">{{ $picture->user->full_name }}</a>
                                 </h6>
                                 <small class="d-block"><i class="fa-solid fa-award text-secondary"></i>
                                     popular</small>
                             </div>
                         </div>
                         <div class="d-flex align-items-center flex-row gap-2 gap-sm-3">
-                            @if (Auth::user()->favorites()->where('picture_id', '=', $picture->id)->count() > 0)
-                                <button id="singlePageFavBtn" data-id="{{ $picture->id }}"
-                                    class="btn btn-sm btn-outline-secondary">
-                                    <i class="fa-solid fa-heart"></i>
-                                </button>
-                            @else
+                            @guest
                                 <button id="singlePageFavBtn" data-id="{{ $picture->id }}"
                                     class="btn btn-sm btn-outline-secondary">
                                     <i class="fa-regular fa-heart"></i>
                                 </button>
-                            @endif
+                            @elseif (Auth::user()->favorites()->where('picture_id', '=', $picture->id)->count() > 0)
+                                <button id="singlePageFavBtn" data-id="{{ $picture->id }}"
+                                    class="btn btn-sm btn-outline-secondary">
+                                    <i class="fa-solid fa-heart"></i>
+                                </button>
+                            @endguest
 
                             <a href="{{ route('download', $picture->slug) }}" class="btn btn-sm btn-primary">
                                 <i class="fa-solid fa-download me-1 d-none d-sm-inline"></i>
@@ -104,7 +105,8 @@
                             <div class="col-12">
                                 <div class="image-tags d-flex flex-wrap gap-2">
                                     @foreach ($picture->tags as $tag)
-                                        <a class="badge rounded-pill" href="#" role="button">{{ $tag->name }}</a>
+                                        <a class="badge rounded-pill" href="{{ route('picturesByTag', $tag->slug) }}"
+                                            role="button">{{ $tag->name }}</a>
                                     @endforeach
 
                                 </div>
@@ -138,7 +140,7 @@
                                                             class="rounded-circle d-block" alt="{{ $r_picture->title }}" />
                                                         <div>
                                                             <h6 class="mb-0 fw-semibold">
-                                                                <a href="#"
+                                                                <a href="{{ route('author.index', $r_picture->user->slug) }}"
                                                                     class="text-decoration-none">{{ $r_picture->user->full_name }}</a>
                                                             </h6>
                                                             <small class="d-block text-light"><i
@@ -164,7 +166,7 @@
                             <i class="fa-solid fa-shield-halved me-1 text-muted"></i>
                             Under the license of Yourpics
                         </p>
-                        <a href="#" class="btn btn-sm px-4 btn-secondary">
+                        <a href="{{ route('gallery') }}" class="btn btn-sm px-4 btn-secondary">
                             <i class="fa-solid fa-left-long me-1"></i> Gallery
                         </a>
                     </div>
