@@ -164,14 +164,21 @@
                 <div class="row align-items-end gy-4">
                     <div class="col-lg-7">
                         <strong class="text-black">Popular Tags: </strong>
-                        <span class="badge rounded-pill text-bg-primary">Primary</span>
+                        @if ($popular_tags)
+                            @foreach ($popular_tags as $tag)
+                                <a href="{{ route('picturesByTag', $tag->slug) }}"
+                                    class="badge rounded-pill text-bg-light text-decoration-none text-dark">{{ $tag->name }}</a>
+                            @endforeach
+                        @endif
+
+                        {{-- <span class="badge rounded-pill text-bg-primary">Primary</span>
                         <span class="badge rounded-pill text-bg-secondary">Secondary</span>
                         <span class="badge rounded-pill text-bg-success">Success</span>
                         <span class="badge rounded-pill text-bg-danger">Danger</span>
                         <span class="badge rounded-pill text-bg-warning">Warning</span>
                         <span class="badge rounded-pill text-bg-info">Info</span>
                         <span class="badge rounded-pill text-bg-light">Light</span>
-                        <span class="badge rounded-pill text-bg-dark">Dark</span>
+                        <span class="badge rounded-pill text-bg-dark">Dark</span> --}}
                     </div>
                     <div class="col-lg-5" style="margin-bottom: -3.75rem">
                         <div class="search-wrapper p-3 rounded shadow-sm w-100">
