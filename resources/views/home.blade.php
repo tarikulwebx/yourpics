@@ -333,6 +333,7 @@
 
             $('#pictureShowModal #userName').html(user.first_name + ' ' + user.last_name).attr('href', '/author/' + user
                 .slug);
+            $('#pictureShowModal #userRank').html(picture.user_rank);
             $('#pictureShowModal #downloadBtn').attr('href', '/download/' + picture.slug);
             $('#pictureShowModal #pictureImg').attr('src', '/storage/' + picture.picture);
             $('#pictureShowModal #pictureImg').attr('alt', picture.title);
@@ -393,7 +394,7 @@
                                                 <a href="/author/${related_picture.user.slug}" class="text-decoration-none">${related_picture.user.first_name + ' '+ related_picture.user.last_name}</a>
                                             </h6>
                                             <small class="d-block"><i class="fa-solid fa-award"></i>
-                                                popular</small>
+                                                ${related_picture.user.rank}</small>
                                         </div>
                                     </div>
                                     <a href="/download/${related_picture.slug}" class="btn download-btn">
@@ -457,7 +458,7 @@
         $('#pictureShowModal').on('hidden.bs.modal', function() {
             $('#pictureShowModal #userImg').attr('src', '/assets/images/profile-placeholder.jpg');
             $('#pictureShowModal #pictureImg').attr('src', '/assets/images/picture-placeholder.jpg');
-
+            $('#pictureShowModal #userRank').html('..');
             $('#pictureShowModal #userName').html('..');
             $('#pictureShowModal #downloadBtn').attr('href', '');
             $('#pictureShowModal #pictureImg').attr('alt', '..');

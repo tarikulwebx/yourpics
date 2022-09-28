@@ -19,7 +19,7 @@
                             <h3 class="mb-1">{{ $author->full_name }}</h3>
                             <h6 class="text-muted mb-3 fw-normal">
                                 <i class="fa-solid fa-award me-1 text-secondary"></i>
-                                Most Popular
+                                {{ $author->rank }}
                             </h6>
                             <p class="lead">
                                 {{ $author->bio }}
@@ -238,6 +238,8 @@
                 $('#pictureShowModal #userImg').attr('src', '/assets/images/profile-placeholder.jpg');
             }
 
+            $('#pictureShowModal #userRank').html(picture.user_rank);
+
             $('#pictureShowModal #userName').html(user.first_name + ' ' + user.last_name).attr('href', '/author/' + user
                 .slug);
             $('#pictureShowModal #downloadBtn').attr('href', '/download/' + picture.slug);
@@ -299,8 +301,8 @@
                                             <h6 class="mb-0 fw-semibold">
                                                 <a href="/author/${related_picture.user.slug}" class="text-decoration-none">${related_picture.user.first_name + ' '+ related_picture.user.last_name}</a>
                                             </h6>
-                                            <small class="d-block"><i class="fa-solid fa-award"></i>
-                                                popular</small>
+                                            <small class="d-block fw-normal text-white"><i class="fa-solid fa-award"></i>
+                                                ${related_picture.user.rank}</small>
                                         </div>
                                     </div>
                                     <a href="/download/${related_picture.slug}" class="btn download-btn">
@@ -364,7 +366,7 @@
         $('#pictureShowModal').on('hidden.bs.modal', function() {
             $('#pictureShowModal #userImg').attr('src', '/assets/images/profile-placeholder.jpg');
             $('#pictureShowModal #pictureImg').attr('src', '/assets/images/picture-placeholder.jpg');
-
+            $('#pictureShowModal #userRank').html('..');
             $('#pictureShowModal #userName').html('..');
             $('#pictureShowModal #downloadBtn').attr('href', '');
             $('#pictureShowModal #pictureImg').attr('alt', '..');

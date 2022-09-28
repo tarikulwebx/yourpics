@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
@@ -63,6 +64,25 @@ class User extends Authenticatable
     public function getPictureUrlAttribute()
     {
         return $this->picture ? url('/') . '/storage/' . $this->picture : url('/') . '/assets/images/profile-placeholder.jpg';
+    }
+
+    /**
+     * Rank
+     */
+    public function getRankAttribute()
+    {
+        $popular_uploaders = Picture::orderBy('views', 'desc')->pluck('id')->take(10);
+        $top_uploaders = User::withCount('pictures')->get()->sortByDesc('pictures_count')->pluck('id')->take(10);
+        $new_uploaders = User::withCount('pictures')->get()->sortBy('pictures_count')->pluck('id')->take(10);
+        if ($popular_uploaders->contains($this->id)) {
+            return 'Popular';
+        } else if ($top_uploaders->contains($this->id)) {
+            return 'Top';
+        } else if ($new_uploaders->contains($this->id)) {
+            return 'New';
+        } else {
+            return 'Uploader';
+        }
     }
 
 

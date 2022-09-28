@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Picture;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,8 +29,6 @@ class HomeController extends Controller
     {
         $pictures = Picture::with('user')->latest()->paginate(20);
         $tags = Tag::orderBy('name', 'asc')->get();
-
-
 
         if ($request->ajax()) {
             $html = '';
@@ -74,12 +73,12 @@ class HomeController extends Controller
                                         <img src="' . $picture->user->picture_url . '" class="rounded-circle d-block"
                                             alt=".." />
                                         <div>
-                                            <h6 class="mb-0 fw-semibold">
+                                            <h6 class="mb-0 fw-semibold ">
                                                 <a href="' . route('author.index', $picture->user->slug) . '"
                                                     class="text-decoration-none">' . $picture->user->full_name . '</a>
                                             </h6>
-                                            <small class="d-block text-light"><i class="fa-solid fa-award"></i>
-                                                popular</small>
+                                            <small class="d-block fw-normal text-light"><i class="fa-solid fa-award"></i>
+                                                ' . $picture->user->rank . '</small>
                                         </div>
                                     </div>
                                     <a href="' . route('download', $picture->slug) . '" class="btn download-btn">

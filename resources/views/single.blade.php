@@ -18,7 +18,7 @@
                                         class="text-decoration-none">{{ $picture->user->full_name }}</a>
                                 </h6>
                                 <small class="d-block"><i class="fa-solid fa-award text-secondary"></i>
-                                    popular</small>
+                                    {{ $picture->user->rank }}</small>
                             </div>
                         </div>
                         <div class="d-flex align-items-center flex-row gap-2 gap-sm-3">
@@ -143,9 +143,9 @@
                                                                 <a href="{{ route('author.index', $r_picture->user->slug) }}"
                                                                     class="text-decoration-none">{{ $r_picture->user->full_name }}</a>
                                                             </h6>
-                                                            <small class="d-block text-light"><i
+                                                            <small class="d-block text-light fw-normal small"><i
                                                                     class="fa-solid fa-award"></i>
-                                                                popular</small>
+                                                                {{ $r_picture->user->rank }}</small>
                                                         </div>
                                                     </div>
                                                     <a href="{{ route('download', $r_picture->slug) }}"

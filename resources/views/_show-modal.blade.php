@@ -14,8 +14,8 @@
                         <h6 class="mb-0 fw-semibold">
                             <a id="userName" href="#" class="text-decoration-none">..</a>
                         </h6>
-                        <small class="d-block"><i class="fa-solid fa-award text-secondary"></i>
-                            popular</small>
+                        <small id="userRank" class="d-block"><i class="fa-solid fa-award text-secondary"></i>
+                            ..</small>
                     </div>
                 </div>
                 <div class="d-flex align-items-center flex-row gap-2 gap-sm-3">

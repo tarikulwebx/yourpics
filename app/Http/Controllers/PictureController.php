@@ -175,13 +175,13 @@ class PictureController extends Controller
         $picture->tags;
         $related = $picture->relatedPicturesByTag();
 
-        // foreach ($related as $related_picture) {
-        //     $related_picture->user;
-        // }
-
+        foreach ($related as $related_pic) {
+            $related_pic->user['rank'] = $related_pic->user->rank;
+        }
 
         $picture['related'] = $related;
         $picture['favorites_count'] = $picture->favorites()->count();
+        $picture['user_rank'] = $picture->user->rank;
 
         if (Auth::guest()) {
             $picture['favorite'] = false;

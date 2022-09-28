@@ -96,7 +96,7 @@
                                                             class="text-decoration-none">{{ $picture->user->full_name }}</a>
                                                     </h6>
                                                     <small class="d-block text-light"><i class="fa-solid fa-award"></i>
-                                                        popular</small>
+                                                        {{ $picture->user->rank }}</small>
                                                 </div>
                                             </div>
                                             <a href="{{ route('download', $picture->slug) }}" class="btn download-btn">
@@ -147,6 +147,7 @@
             if (user.picture) {
                 $('#pictureShowModal #userImg').attr('src', '/storage/' + user.picture);
             }
+            $('#pictureShowModal #userRank').html(picture.user_rank);
 
             $('#pictureShowModal #userName').html(user.first_name + ' ' + user.last_name).attr('href', '/author/' + user
                 .slug);
@@ -209,8 +210,8 @@
                                             <h6 class="mb-0 fw-semibold">
                                                 <a href="/author/${related_picture.user.slug}" class="text-decoration-none">${related_picture.user.first_name + ' '+ related_picture.user.last_name}</a>
                                             </h6>
-                                            <small class="d-block"><i class="fa-solid fa-award"></i>
-                                                popular</small>
+                                            <small class="d-block text-light fw-normal"><i class="fa-solid fa-award"></i>
+                                                ${related_picture.user.rank}</small>
                                         </div>
                                     </div>
                                     <a href="/download/${related_picture.slug}" class="btn download-btn">

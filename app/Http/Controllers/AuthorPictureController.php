@@ -13,11 +13,17 @@ class AuthorPictureController extends Controller
     {
         $author = User::findBySlugOrFail($slug);
         $uploaded_pictures = $author->pictures()->latest()->paginate(20, ['*'], 'uploads_page');
+        foreach ($uploaded_pictures as $uploaded_pic) {
+            $uploaded_pic->user['rank'] = $uploaded_pic->user->rank;
+        }
 
         $favIds = $author->favorites()->pluck('picture_id')->all();
         $favorite_pictures = Picture::where(function ($query) use ($favIds) {
             $query->whereIn('id', $favIds);
         })->latest()->paginate(20, ['*'], 'favs_page');
+        foreach ($favorite_pictures as $fav_pic) {
+            $fav_pic->user['rank'] = $fav_pic->user->rank;
+        }
 
 
         if (isset($_GET['fav']) && $request->ajax()) {
@@ -67,8 +73,8 @@ class AuthorPictureController extends Controller
                                             <a href="' . route('author.index', $picture->user->slug) . '"
                                                 class="text-decoration-none">' . $picture->user->full_name . '</a>
                                         </h6>
-                                        <small class="d-block text-light"><i class="fa-solid fa-award"></i>
-                                            popular</small>
+                                        <small class="d-block text-light fw-normal"><i class="fa-solid fa-award"></i>
+                                            ' . $picture->user->rank . '</small>
                                     </div>
                                 </div>
                                 <a href="' . route('download', $picture->slug) . '" class="btn download-btn">
@@ -131,8 +137,8 @@ class AuthorPictureController extends Controller
                                             <a href="' . route('author.index', $picture->user->slug) . '"
                                                 class="text-decoration-none">' . $picture->user->full_name . '</a>
                                         </h6>
-                                        <small class="d-block text-light"><i class="fa-solid fa-award"></i>
-                                            popular</small>
+                                        <small class="d-block text-light fw-normal"><i class="fa-solid fa-award"></i>
+                                            ' . $picture->user->rank . '</small>
                                     </div>
                                 </div>
                                 <a href="' . route('download', $picture->slug) . '" class="btn download-btn">
