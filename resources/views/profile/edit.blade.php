@@ -4,6 +4,11 @@
 
 @section('profile-content')
     @include('components.alert')
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <h3 class="text-primary mb-0">Edit Profile <i class="fa-solid fa-user-pen"></i></h3>
+        <a href="{{ route('profile.index') }}" class="btn btn-sm btn-outline-primary">
+            Go to Profile</a>
+    </div>
     <form action="{{ route('profile.update', Auth::user()->slug) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -16,7 +21,7 @@
                         onclick="document.getElementById('picture-input').click()" alt="" />
                 </div>
                 <input id="picture-input" name="picture"
-                    class="form-control mt-2 @error('picture')
+                    class="form-control mt-3 @error('picture')
                     is-invalid
                 @enderror"
                     type="file" placeholder="Choose image" accept="image/*"

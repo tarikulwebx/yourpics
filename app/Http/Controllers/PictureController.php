@@ -120,10 +120,14 @@ class PictureController extends Controller
     /**
      * Uploaded Images of a Profile
      */
-    public function uploads($slug)
+    public function uploads(Request $request, $slug)
     {
         $user = Auth::user();
-        $pictures = $user->pictures()->latest()->get();
+        $pictures = $user->pictures()->where(function ($query) use ($request) {
+            if ($request->search) {
+                $query->where('title', 'LIKE', '%' . $request->search . '%');
+            }
+        })->latest()->paginate(12);
 
         return view('profile.uploads', compact('pictures'));
     }

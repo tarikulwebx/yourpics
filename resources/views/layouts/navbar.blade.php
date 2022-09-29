@@ -34,13 +34,15 @@
                                 Profile</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="profile-edit.html"><i class="fa-solid fa-pencil"></i> Edit
+                            <a class="dropdown-item" href="{{ route('profile.edit', Auth::user()->slug) }}"><i
+                                    class="fa-solid fa-pencil"></i> Edit
                                 profile</a>
                         </li>
 
                         <li>
-                            <a class="dropdown-item" href="profile-upload.html"><i class="fa-solid fa-camera-retro"></i>
-                                Upload photo</a>
+                            <a class="dropdown-item" href="{{ route('profile.uploads', Auth::user()->slug) }}"><i
+                                    class="fa-regular fa-images"></i>
+                                Your Uploads </a>
                         </li>
 
                         <li>
@@ -104,14 +106,16 @@
                                     Profile</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="profile-edit.html"><i class="fa-solid fa-pencil"></i>
+                                <a class="dropdown-item" href="{{ route('profile.edit', Auth::user()->slug) }}"><i
+                                        class="fa-solid fa-pencil"></i>
                                     Edit
                                     profile</a>
                             </li>
 
                             <li>
-                                <a class="dropdown-item" href="profile-upload.html"><i class="fa-solid fa-camera-retro"></i>
-                                    Upload photo</a>
+                                <a class="dropdown-item" href="{{ route('profile.uploads', Auth::user()->slug) }}"><i
+                                        class="fa-regular fa-images"></i>
+                                    Your Uploads</a>
                             </li>
 
                             <li>

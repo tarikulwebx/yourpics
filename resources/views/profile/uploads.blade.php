@@ -4,7 +4,24 @@
 
 @section('profile-content')
     @include('components.alert')
-    <h4 class="mb-3 fw-bold text-dark text-uppercase">YOur Uploads</h4>
+    <div class="d-flex align-items-center justify-content-between mb-2 pb-1">
+        <h3 class="text-primary mb-0">Your Uploads <i class="fa-solid fa-grip text-secondary"></i></h3>
+        <a href="{{ route('profile.upload.create', Auth::user()->slug) }}" class="btn btn-sm btn-outline-primary">
+            <i class="fa-solid fa-upload"></i> New upload</a>
+    </div>
+    <div class="filter mb-4">
+
+        <form id="searchForm" method="GET">
+            <div class="input-group search-input-group">
+                <input type="text" name="search" class="form-control form-control-sm shadow-none py-2 px-3"
+                    placeholder="Search..." value="{{ request('search') }}" aria-label="search" aria-describedby="search" />
+                <button id="searchBtn" class="btn btn-primary" type="submit">
+                    <i class="fa-solid fa-magnifying-glass me-1"></i>
+                    Search
+                </button>
+            </div>
+        </form>
+    </div>
     <!-- UPLOADS GALLERY -->
     <section id="gallery-section" class="gallery-section">
         <div id="mansonryGridAuthorUploads" class="row g-4">
@@ -22,6 +39,19 @@
                                     <div class="caption fw-semibold">
                                         {{ $picture->title }}
                                     </div>
+                                    @guest
+                                        <button class="btn fav-btn" data-id="{{ $picture->id }}">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </button>
+                                    @elseif (Auth::user()->favorites()->where('picture_id', '=', $picture->id)->count() > 0)
+                                        <button class="btn fav-btn text-white" data-id="{{ $picture->id }}">
+                                            <i class="fa-solid fa-heart "></i>
+                                        </button>
+                                    @else
+                                        <button class="btn fav-btn" data-id="{{ $picture->id }}">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </button>
+                                    @endguest
                                 </div>
                                 <div class="card-hover-content__footer d-flex align-items-center justify-content-between">
                                     <div>
@@ -42,15 +72,7 @@
 
         </div>
 
-        <!-- Load More Btn -->
-        <div class="text-center mt-4 pt-2 d-flex align-items-center justify-content-between gap-3">
-            <hr class="border border-primary border-1 opacity-25 w-100" />
-            <button class="btn btn-outline-primary rounded-circle loadmore-btn shadow">
-                <span class="d-block">Load</span>
-                <span class="d-block">More</span>
-            </button>
-            <hr class="border border-primary border-1 opacity-25 w-100" />
-        </div>
+        {{ $pictures->links() }}
     </section>
 
 

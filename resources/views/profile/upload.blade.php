@@ -4,7 +4,11 @@
 
 @section('profile-content')
     @include('components.alert')
-    <h4 class="mb-3 fw-bold text-dark text-uppercase">New Upload</h4>
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <h3 class="text-primary mb-0">Upload <i class="fa-solid fa-upload"></i></h3>
+        <a href="{{ route('profile.index') }}" class="btn btn-sm btn-outline-primary">
+            Go to Profile</a>
+    </div>
     <form action="{{ route('profile.upload.store', Auth::user()->slug) }}" method="POST" enctype="multipart/form-data">
         @csrf
 
