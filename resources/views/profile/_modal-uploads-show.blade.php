@@ -11,16 +11,16 @@
                             <div id="userName" class="text-decoration-none text-primary">...</div>
                         </h6>
                         <small class="d-block"><i class="fa-solid fa-award text-secondary"></i>
-                            popular</small>
+                            <span id="userRank">..</span></small>
                     </div>
                 </div>
                 <div class="d-flex align-items-center flex-row gap-2 gap-sm-3">
                     <button class="btn btn-sm text-muted" type="button" data-bs-dismiss="modal" data-bs-toggle="modal">
                         Close
                     </button>
-                    <button class="btn btn-sm btn-outline-secondary">
-                        <i class="fa-regular fa-heart"></i>
-                    </button>
+                    <a href=""
+                        class="btn btn-sm text-secondary bg-secondary bg-opacity-10 rounded-5 gallery-image-edit-btn editLink"><i
+                            class="fa-solid fa-pen"></i></a>
                     <a id="downloadBtn" href="" class="btn btn-sm btn-primary">
                         <i class="fa-solid fa-download me-1 d-none d-sm-inline"></i>
                         Download
@@ -46,7 +46,7 @@
                                                 Views
                                             </h6>
                                             <p id="totalViews" class="mb-0 small text-muted">
-                                                1,345,443
+                                                ..
                                             </p>
                                         </div>
                                         <div class="vr"></div>
@@ -55,7 +55,7 @@
                                                 Downloads
                                             </h6>
                                             <p id="totalDownloads" class="mb-0 small text-muted">
-                                                245,234
+                                                ..
                                             </p>
                                         </div>
                                         <div class="vr"></div>
@@ -64,7 +64,7 @@
                                                 Favorite
                                             </h6>
                                             <p id="totalFavs" class="mb-0 small text-muted">
-                                                1,335
+                                                ..
                                             </p>
                                         </div>
                                     </div>
@@ -112,12 +112,13 @@
                     Under the license of Yourpics
                 </p>
                 <div class="d-flex flex-row">
-                    <a id="editLink" href="#" class="btn btn-sm px-3 btn-primary me-1">
-                        Edit
-                    </a>
-                    <button type="button" class="btn btn-sm px-3 btn-secondary" data-bs-dismiss="modal">
+
+                    <button type="button" class="btn btn-sm px-3 btn-secondary me-2" data-bs-dismiss="modal">
                         Close
                     </button>
+                    <a href="#" class="btn btn-sm px-3 btn-primary  editLink">
+                        Edit
+                    </a>
                 </div>
             </div>
         </div>

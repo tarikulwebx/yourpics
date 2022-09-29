@@ -52,33 +52,37 @@ $(document).ready(function() {
         let $user = $picture.user;
         let tags = $picture.tags;
         $('#imageShowProfileUploadsModal #userName').html($user.first_name + ' ' + $user.last_name);
+        $('#imageShowProfileUploadsModal #userRank').html($picture.user_rank);
+
         $('#imageShowProfileUploadsModal  #pictureTitle').html($picture.title);
+        
 
         $('#imageShowProfileUploadsModal  #pictureHolderImg').attr("src", '/storage/' + $picture.picture);
         if ($user.picture) {
             $('#imageShowProfileUploadsModal  #authorImage').attr('src', '/storage/' + $user.picture);
         }
-        $('#downloadBtn').attr('href', '/download/' +$picture.slug);
-        $('#totalViews').html($picture.views);
-        $('#totalDownloads').html($picture.downloads);
-        $('#uploadDate').html($picture.created_at);
+        $('#imageShowProfileUploadsModal #downloadBtn').attr('href', '/download/' +$picture.slug);
+        $('#imageShowProfileUploadsModal #totalViews').html($picture.views);
+        $('#imageShowProfileUploadsModal #totalDownloads').html($picture.downloads);
+        $('#imageShowProfileUploadsModal #totalFavs').html($picture.favorites_count);
+        $('#imageShowProfileUploadsModal #uploadDate').html($picture.created_at);
 
-        $('#editLink').attr('href', '/profile/'+$user.slug+'/uploads/'+$picture.slug+'/edit')
+        $('#imageShowProfileUploadsModal .editLink').attr('href', '/profile/'+$user.slug+'/uploads/'+$picture.slug+'/edit')
 
         if ($picture.description) {
-            $('.description-wrapper').removeClass('d-none');
-            $('#description').html($picture.description);
+            $('#imageShowProfileUploadsModal .description-wrapper').removeClass('d-none');
+            $('#imageShowProfileUploadsModal #description').html($picture.description);
         }
         
 
-         $('#pictureTags').empty();
+         $('#imageShowProfileUploadsModal #pictureTags').empty();
         $.each(tags, function(index, tag) {
-            $('#pictureTags').append('<a class="badge rounded-pill" href="#" role="button">'+tag.name+'</a>');
+            $('#imageShowProfileUploadsModal #pictureTags').append('<a class="badge rounded-pill" href="/tag/'+tag.slug+'" role="button">'+tag.name+'</a>');
         });
     }
 
 
-    $('.showUploadsModal').on('click', function(e) {
+    $(document).on('click', '.showUploadsModal', function(e) {
         e.preventDefault();
         var id = $(this).data('id');
 
@@ -89,7 +93,7 @@ $(document).ready(function() {
         .then(res => {
             $picture = res.data.picture;
             renderData($picture);
-            console.log( $picture)
+            // console.log( $picture)
         })
         .catch(err => {
             console.error(err); 

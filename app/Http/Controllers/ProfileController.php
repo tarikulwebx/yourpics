@@ -19,10 +19,146 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
-        return view('profile.index', compact('user'));
+        $uploaded_pictures = $user->pictures()->latest()->paginate(12, ['*'], 'uploads_page');
+
+        $favIds = $user->favorites()->pluck('picture_id')->all();
+        $favorite_pictures = Picture::where(function ($query) use ($favIds) {
+            $query->whereIn('id', $favIds);
+        })->latest()->paginate(20, ['*'], 'favs_page');
+
+
+        // Favorite content return
+        if (isset($_GET['fav']) && $request->ajax()) {
+            $html = '';
+
+
+
+            foreach ($favorite_pictures as $picture) {
+
+                $fav_btn_content = '';
+                if (Auth::guest()) {
+                    $fav_btn_content .= '<button class="btn fav-btn" data-id="' . $picture->id . '">
+                                        <i class="fa-regular fa-heart"></i>
+                                    </button>';
+                } else {
+                    if (Auth::user()->favorites()->where('picture_id', '=', $picture['id'])->count() > 0) {
+                        $fav_btn_content .= '<button class="btn fav-btn text-white" data-id="' . $picture->id . '">
+                                        <i class="fa-solid fa-heart "></i>
+                                    </button>';
+                    } else {
+                        $fav_btn_content .= '<button class="btn fav-btn" data-id="' . $picture->id . '">
+                                        <i class="fa-regular fa-heart"></i>
+                                    </button>';
+                    }
+                }
+
+                $html .= '<div class="col-sm-6 col-lg-4 grid-item">
+                    <div class="img-card">
+                        <a href="#" class="image-wrapper-link d-block showModalBtn"
+                            data-id="' . $picture->id . '">
+                            <img class="img-fluid" src="' . $picture->picture_url . '"
+                                alt="' . $picture->title . '" />
+                            
+                        </a>
+                        <div class="card-hover-content p-2 d-flex flex-column text-white">
+                            <div
+                                class="card-hover-content__header d-flex align-items-center justify-content-between">
+                                <div class="caption fw-semibold">
+                                    ' . $picture->title . '
+                                </div>
+                                ' . $fav_btn_content . '
+                            </div>
+                            <div
+                                class="card-hover-content__footer d-flex align-items-center justify-content-between">
+                                <div class="author d-flex align-items-center gap-2">
+                                    <img src="' . $picture->user->picture_url . '" class="rounded-circle d-block"
+                                        alt=".." />
+                                    <div>
+                                        <h6 class="mb-0 fw-semibold">
+                                            <a href="' . route('author.index', $picture->user->slug) . '"
+                                                class="text-decoration-none">' . $picture->user->full_name . '</a>
+                                        </h6>
+                                        <small class="d-block text-light fw-normal"><i class="fa-solid fa-award"></i>
+                                            ' . $picture->user->rank . '</small>
+                                    </div>
+                                </div>
+                                <a href="' . route('download', $picture->slug) . '" class="btn download-btn">
+                                    <i class="fa-solid fa-download"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>';
+            }
+            return $html;
+        }
+
+
+        // Uploads return
+        if ($request->ajax()) {
+            $html = '';
+
+
+            foreach ($uploaded_pictures as $picture) {
+
+                $fav_btn_content = '';
+                if (Auth::guest()) {
+                    $fav_btn_content .= '<button class="btn fav-btn" data-id="' . $picture->id . '">
+                                        <i class="fa-regular fa-heart"></i>
+                                    </button>';
+                } else {
+                    if (Auth::user()->favorites()->where('picture_id', '=', $picture['id'])->count() > 0) {
+                        $fav_btn_content .= '<button class="btn fav-btn text-white" data-id="' . $picture->id . '">
+                                        <i class="fa-solid fa-heart "></i>
+                                    </button>';
+                    } else {
+                        $fav_btn_content .= '<button class="btn fav-btn" data-id="' . $picture->id . '">
+                                        <i class="fa-regular fa-heart"></i>
+                                    </button>';
+                    }
+                }
+
+                $html .= '<div class="col-sm-6 col-lg-4 grid-item">
+                    <div class="img-card">
+                        <a href="#" class="image-wrapper-link d-block showUploadsModal"
+                            data-id="' . $picture->id . '">
+                            <img class="img-fluid" src="' . $picture->picture_url . '"
+                                alt="' . $picture->title . '" />
+                        </a>
+                        <div class="card-hover-content p-2 d-flex flex-column text-white">
+                            <div
+                                class="card-hover-content__header d-flex align-items-center justify-content-between">
+                                <div class="caption fw-semibold">
+                                    ' . $picture->title . '
+                                </div>
+                                ' . $fav_btn_content . '
+                            </div>
+                            <div
+                                class="card-hover-content__footer d-flex align-items-center justify-content-between">
+                                <div>
+                                    <a href="' . route('profile.uploads.edit', [$user->slug, $picture->slug]) . '" class="btn btn-sm text-light rounded-5 gallery-image-edit-btn"><i
+                                            class="fa-solid fa-pen"></i></a>
+                                </div>
+                                <a href="' . route('download', $picture->slug) . '" class="btn download-btn">
+                                    <i class="fa-solid fa-download"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>';
+            }
+            return $html;
+        }
+
+        $upload_count = $uploaded_pictures->total();
+        $favs_count = $favorite_pictures->total();
+
+        return view('profile.index', compact('user', 'upload_count', 'favs_count'));
     }
 
     /**
@@ -148,6 +284,8 @@ class ProfileController extends Controller
         $picture = Picture::findOrFail($id);
         $picture->user;
         $picture->tags;
+        $picture['user_rank'] = $picture->user->rank;
+        $picture['favorites_count'] = $picture->favorites()->count();
 
         $data = [
             'picture' => $picture,
