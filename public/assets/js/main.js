@@ -104,6 +104,18 @@ $(document).ready(function() {
 
     $("#imageShowProfileUploadsModal").on('hidden.bs.modal', function() {
         $('#imageShowProfileUploadsModal  #pictureHolderImg').attr('src', '/assets/images/picture-placeholder.jpg');
+        $('#imageShowProfileUploadsModal #userName').html('...');
+        $('#imageShowProfileUploadsModal #userRank').html('..');
+        $('#imageShowProfileUploadsModal  #pictureTitle').html('...');
+        $('#imageShowProfileUploadsModal #pictureTags').empty();
+
+        $('#imageShowProfileUploadsModal #totalViews').html('..');
+        $('#imageShowProfileUploadsModal #totalDownloads').html('..');
+        $('#imageShowProfileUploadsModal #totalFavs').html('..');
+        $('#imageShowProfileUploadsModal #uploadDate').html('..');
+
+        $('#imageShowProfileUploadsModal .description-wrapper').addClass('d-none');
+        $('#imageShowProfileUploadsModal #description').html('..');
     });
 
 

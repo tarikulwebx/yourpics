@@ -282,10 +282,16 @@ class ProfileController extends Controller
     public function getPictureById($id)
     {
         $picture = Picture::findOrFail($id);
+        $picture->update([
+            'views' => $picture->views + 1
+        ]);
+
         $picture->user;
         $picture->tags;
         $picture['user_rank'] = $picture->user->rank;
         $picture['favorites_count'] = $picture->favorites()->count();
+
+
 
         $data = [
             'picture' => $picture,
