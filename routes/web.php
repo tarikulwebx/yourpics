@@ -58,3 +58,17 @@ Route::get('/getPictureById/{id}', [PictureController::class, 'getPictureById'])
 
 // Add to Favorite
 Route::post('/addToFavorite', [FavoriteController::class, 'addToFavorite']);
+
+
+
+
+
+
+
+/**
+ * Admin Routes
+ */
+
+Route::get('/admin', function () {
+    return view('admin.index');
+})->name('admin.dashboard');
