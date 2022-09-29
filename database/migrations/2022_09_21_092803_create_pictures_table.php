@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedInteger('views')->default(0);
             $table->unsignedInteger('downloads')->default(0);
-            $table->boolean('is_published');
+            $table->boolean('is_published')->default(true);
             $table->timestamps();
         });
     }

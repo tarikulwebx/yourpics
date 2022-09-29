@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('password');
             $table->text('bio')->nullable();
             $table->text('picture')->nullable();
+            $table->boolean('is_admin')->nullable();
             $table->boolean('is_active')->default(true);
             $table->rememberToken();
             $table->timestamps();
